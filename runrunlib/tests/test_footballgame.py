@@ -1,5 +1,6 @@
 import unittest
 from runrunlib import FootballGame, FootballTeam
+from runrunlib.footballteam import not_set_team
 
 
 class FootballGameTests(unittest.TestCase):
@@ -22,10 +23,24 @@ class FootballGameTests(unittest.TestCase):
         self.assertEqual(game.get_team1().get_name(), 'team356')
         self.assertEqual(game.get_team2().get_name(), 'team861')
 
-    def test_should_set_not_set_players_at_constructor(self):
+    def test_team_should_set_notsettream_at_constructor(self):
         # Arrange & Act
         game = FootballGame()
 
         # Assert
         self.assertFalse(game.get_team1().is_set())
         self.assertFalse(game.get_team1().is_set())
+
+    def test_team1_should_throw_exception_if_team_is_already_set(self):
+        # Arrange
+        game = FootballGame().team1(FootballTeam(name='team1'))
+
+        # Act & Assert
+        self.assertRaises(RuntimeError, game.team1, FootballTeam('another'))
+
+    def test_team2_should_throw_exception_if_team_is_already_set(self):
+        # Arrange
+        game = FootballGame().team2(FootballTeam(name='team2'))
+
+        # Act & Assert
+        self.assertRaises(RuntimeError, game.team2, FootballTeam('another'))
