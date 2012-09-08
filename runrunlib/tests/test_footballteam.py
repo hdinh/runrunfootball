@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from runrunlib import FootballTeam
 from runrunlib.footballteam import not_set_team
 
@@ -29,3 +29,6 @@ class FootballTeamTests(TestCase):
         # Assert
         self.assertEqual(not_set_team.get_name(), 'NotSet')
         self.assertFalse(not_set_team.is_set())
+
+if __name__ == '__main__':
+    main()

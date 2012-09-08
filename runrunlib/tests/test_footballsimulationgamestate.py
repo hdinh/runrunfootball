@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
 from runrunlib import FootballTeam
 
@@ -113,3 +113,6 @@ class FootballSimulationGameStateTests(TestCase):
         self.assertRaises(RuntimeError, state.quarter, -1)
         self.assertRaises(RuntimeError, state.quarter, 0)
         self.assertRaises(RuntimeError, state.quarter, 5)
+
+if __name__ == '__main__':
+    main()

@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, main
 from unittest.mock import Mock
 from runrunlib import FootballGame, FootballTeam
 from runrunlib.footballteam import not_set_team
@@ -94,3 +94,6 @@ class FootballGameTests(TestCase):
 
         # Assert
         mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2)
+
+if __name__ == '__main__':
+    main()

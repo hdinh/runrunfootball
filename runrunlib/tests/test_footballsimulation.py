@@ -1,4 +1,4 @@
-from unittest import TestCase, skip
+from unittest import TestCase, skip, main
 from runrunlib.footballsimulation import FootballSimulationGame
 from runrunlib import FootballGame, FootballTeam
 
@@ -15,3 +15,6 @@ class FootballSimulationGameTests(TestCase):
         game_result = simulation.sim_game()
 
         # Assert
+
+if __name__ == '__main__':
+    main()
