@@ -12,7 +12,7 @@ class FootballGame(object):
         self._gameid = gameid
         self._team1 = team1
         self._team2 = team2
-        self._logic = football_logic
+        self._logic = logic
 
     def run(self):
         if not self._team1.is_set():
@@ -20,26 +20,38 @@ class FootballGame(object):
         if not self._team2.is_set():
             raise RuntimeError('team 2 is not set')
 
+        game_result = self._logic.run_game(team1=self._team1, team2=self._team2)
+
+        # TODO: Cheat on purpose until we get test
         return _FootballGameResult(self._team1)
 
     def gameid(self, gameid):
         return FootballGame(gameid=gameid,
                             team1=self._team1,
-                            team2=self._team2)
+                            team2=self._team2,
+                            logic=self._logic)
 
     def team1(self, team):
         if self._team1.is_set():
             raise RuntimeError('team 1 already set')
         return FootballGame(gameid=self._gameid,
                             team1=team,
-                            team2=self._team2)
+                            team2=self._team2,
+                            logic=self._logic)
 
     def team2(self, team):
         if self._team2.is_set():
             raise RuntimeError('team 2 already set')
         return FootballGame(gameid=self._gameid,
                             team1=self._team1,
-                            team2=team)
+                            team2=team,
+                            logic=self._logic)
+
+    def logic(self, logic):
+        return FootballGame(gameid=self._gameid,
+                            team1=self._team1,
+                            team2=self._team2,
+                            logic=logic)
 
     def get_gameid(self):
         return self._gameid

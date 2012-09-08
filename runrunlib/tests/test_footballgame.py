@@ -1,10 +1,11 @@
-import unittest
+from unittest import TestCase
+from unittest.mock import Mock
 from runrunlib import FootballGame, FootballTeam
 from runrunlib.footballteam import not_set_team
 from runrunlib.footballlogic import football_logic
 
 
-class FootballGameTests(unittest.TestCase):
+class FootballGameTests(TestCase):
     def test_name_should_set_name(self):
         # Arrange & Act
         game = FootballGame().gameid(40)
@@ -69,10 +70,27 @@ class FootballGameTests(unittest.TestCase):
 
     def test_running_game_should_declare_winner_at_end(self):
         # Arrange & Act
-        game_result = FootballGame().team1(FootballTeam(name='team1')) \
-                                    .team2(FootballTeam(name='team2')) \
-                                    .run()
+        game_result = FootballGame() \
+                        .team1(FootballTeam(name='team1')) \
+                        .team2(FootballTeam(name='team2')) \
+                        .run()
 
         # Assert
         winner = game_result.get_winner()
         self.assertTrue(winner.get_name() == 'team1' or winner.get_name() == 'team2')
+
+    def test_running_game_should_call_and_return_logic_rungame(self):
+        # Arrange & Act
+        mock_logic = Mock(spec=type(football_logic))
+        team1 = FootballTeam(name='team1')
+        team2 = FootballTeam(name='team2')
+
+        # Act
+        game_result = FootballGame() \
+                        .team1(team1) \
+                        .team2(team2) \
+                        .logic(mock_logic) \
+                        .run()
+
+        # Assert
+        mock_logic.run_game.assert_called_once_with(team1=team1, team2=team2)

@@ -1,9 +1,9 @@
-import unittest
+from unittest import TestCase
 from runrunlib import FootballTeam
 from runrunlib.footballteam import not_set_team
 
 
-class FootballTeamTests(unittest.TestCase):
+class FootballTeamTests(TestCase):
     def test_constructor_should_set_name_to_notnamed(self):
         # Arrange & Act
         team = FootballTeam()

@@ -1,5 +1,5 @@
-import unittest
+from unittest import TestCase
 
 
-class FootballLogic(unittest.TestCase):
+class FootballLogic(TestCase):
     pass
