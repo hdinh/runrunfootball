@@ -3,8 +3,6 @@ from runrunlib import FootballGame, FootballTeam
 
 
 class FootballGameTests(unittest.TestCase):
-    @unittest.skip('need to do FooballTeam first')
-    def test_should_be_named(self):
-        team1 = FootballTeam()
-        team2 = FootballTeam()
-        game = FootballGame().name('TheGame').team1(team1).team2(team1)
+    def test_name_should_set_name(self):
+        game = FootballGame().gameid(40)
+        self.assertEqual(game.get_gameid(), 40)
