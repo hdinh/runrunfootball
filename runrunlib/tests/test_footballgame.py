@@ -73,6 +73,6 @@ class FootballGameTests(unittest.TestCase):
                                     .team2(FootballTeam(name='team2')) \
                                     .run()
 
-        # Act & Assert
+        # Assert
         winner = game_result.get_winner()
         self.assertTrue(winner.get_name() == 'team1' or winner.get_name() == 'team2')

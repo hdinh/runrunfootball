@@ -1,5 +1,7 @@
 from .footballteam import not_set_team
 from .footballlogic import football_logic
+from .footballgameresult import _FootballGameResult
+
 
 class FootballGame(object):
     def __init__(self,
@@ -50,11 +52,3 @@ class FootballGame(object):
 
     def get_logic(self):
         return self._logic
-
-
-class _FootballGameResult(object):
-    def __init__(self, winner):
-        self._winner = winner
-
-    def get_winner(self):
-        return self._winner
