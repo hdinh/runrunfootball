@@ -45,16 +45,26 @@ class FootballGameTests(unittest.TestCase):
         # Act & Assert
         self.assertRaises(RuntimeError, game.team2, FootballTeam('another'))
 
-    def test_rungame_should_throw_exception_if_team1_is_not_set(self):
+    def test_run_should_throw_exception_if_team1_is_not_set(self):
         # Arrange
         game = FootballGame().team2(FootballTeam(name='team2'))
 
         # Act & Assert
         self.assertRaises(RuntimeError, game.run)
 
-    def test_rungame_should_throw_exception_if_team2_is_not_set(self):
+    def test_run_should_throw_exception_if_team2_is_not_set(self):
         # Arrange
         game = FootballGame().team1(FootballTeam(name='team1'))
 
         # Act & Assert
         self.assertRaises(RuntimeError, game.run)
+
+    def test_running_game_should_declare_winner_at_end(self):
+        # Arrange & Act
+        game_result = FootballGame().team1(FootballTeam(name='team1')) \
+                                    .team2(FootballTeam(name='team2')) \
+                                    .run()
+
+        # Act & Assert
+        winner = game_result.get_winner()
+        self.assertTrue(winner.get_name() == 'team1' or winner.get_name() == 'team2')

@@ -15,6 +15,8 @@ class FootballGame(object):
         if not self._team2.is_set():
             raise RuntimeError('team 2 is not set')
 
+        return _FootballGameResult(self._team1)
+
     def gameid(self, gameid):
         return FootballGame(gameid=gameid,
                             team1=self._team1,
@@ -42,3 +44,11 @@ class FootballGame(object):
 
     def get_team2(self):
         return self._team2
+
+
+class _FootballGameResult(object):
+    def __init__(self, winner):
+        self._winner = winner
+
+    def get_winner(self):
+        return self._winner
