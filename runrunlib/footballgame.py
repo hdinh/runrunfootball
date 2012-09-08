@@ -1,13 +1,16 @@
 from .footballteam import not_set_team
+from .footballlogic import football_logic
 
 class FootballGame(object):
     def __init__(self,
                  gameid=-1,
                  team1=not_set_team,
-                 team2=not_set_team):
+                 team2=not_set_team,
+                 logic=football_logic):
         self._gameid = gameid
         self._team1 = team1
         self._team2 = team2
+        self._logic = football_logic
 
     def run(self):
         if not self._team1.is_set():
@@ -44,6 +47,9 @@ class FootballGame(object):
 
     def get_team2(self):
         return self._team2
+
+    def get_logic(self):
+        return self._logic
 
 
 class _FootballGameResult(object):

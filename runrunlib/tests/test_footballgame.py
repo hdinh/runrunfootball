@@ -1,6 +1,7 @@
 import unittest
 from runrunlib import FootballGame, FootballTeam
 from runrunlib.footballteam import not_set_team
+from runrunlib.footballlogic import football_logic
 
 
 class FootballGameTests(unittest.TestCase):
@@ -10,6 +11,13 @@ class FootballGameTests(unittest.TestCase):
 
         # Assert
         self.assertEqual(game.get_gameid(), 40)
+
+    def test_logic_should_be_set_to_football(self):
+        # Arrange
+        game = FootballGame()
+
+        # Assert
+        self.assertEqual(game.get_logic(), football_logic)
 
     def test_should_set_players_of_game(self):
         # Arrange & Act
