@@ -9,6 +9,12 @@ class FootballGame(object):
         self._team1 = team1
         self._team2 = team2
 
+    def run(self):
+        if not self._team1.is_set():
+            raise RuntimeError('team 1 is not set')
+        if not self._team2.is_set():
+            raise RuntimeError('team 2 is not set')
+
     def gameid(self, gameid):
         return FootballGame(gameid=gameid,
                             team1=self._team1,

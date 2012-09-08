@@ -44,3 +44,17 @@ class FootballGameTests(unittest.TestCase):
 
         # Act & Assert
         self.assertRaises(RuntimeError, game.team2, FootballTeam('another'))
+
+    def test_rungame_should_throw_exception_if_team1_is_not_set(self):
+        # Arrange
+        game = FootballGame().team2(FootballTeam(name='team2'))
+
+        # Act & Assert
+        self.assertRaises(RuntimeError, game.run)
+
+    def test_rungame_should_throw_exception_if_team2_is_not_set(self):
+        # Arrange
+        game = FootballGame().team1(FootballTeam(name='team1'))
+
+        # Act & Assert
+        self.assertRaises(RuntimeError, game.run)
