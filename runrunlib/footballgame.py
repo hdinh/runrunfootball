@@ -1,5 +1,5 @@
 from .footballteam import not_set_team
-from .footballlogic import football_logic
+from .footballsimulation import football_simulation
 from .footballgameresult import _FootballGameResult
 
 
@@ -8,11 +8,11 @@ class FootballGame(object):
                  gameid=-1,
                  team1=not_set_team,
                  team2=not_set_team,
-                 logic=football_logic):
+                 simulation=football_simulation):
         self._gameid = gameid
         self._team1 = team1
         self._team2 = team2
-        self._logic = logic
+        self._simulation = simulation
 
     def run(self):
         if not self._team1.is_set():
@@ -20,7 +20,7 @@ class FootballGame(object):
         if not self._team2.is_set():
             raise RuntimeError('team 2 is not set')
 
-        game_result = self._logic.run_game(team1=self._team1, team2=self._team2)
+        game_result = self._simulation.run_game(team1=self._team1, team2=self._team2)
 
         # TODO: Cheat on purpose until we get test
         return _FootballGameResult(self._team1)
@@ -29,7 +29,7 @@ class FootballGame(object):
         return FootballGame(gameid=gameid,
                             team1=self._team1,
                             team2=self._team2,
-                            logic=self._logic)
+                            simulation=self._simulation)
 
     def team1(self, team):
         if self._team1.is_set():
@@ -37,7 +37,7 @@ class FootballGame(object):
         return FootballGame(gameid=self._gameid,
                             team1=team,
                             team2=self._team2,
-                            logic=self._logic)
+                            simulation=self._simulation)
 
     def team2(self, team):
         if self._team2.is_set():
@@ -45,13 +45,13 @@ class FootballGame(object):
         return FootballGame(gameid=self._gameid,
                             team1=self._team1,
                             team2=team,
-                            logic=self._logic)
+                            simulation=self._simulation)
 
-    def logic(self, logic):
+    def simulation(self, simulation):
         return FootballGame(gameid=self._gameid,
                             team1=self._team1,
                             team2=self._team2,
-                            logic=logic)
+                            simulation=simulation)
 
     def get_gameid(self):
         return self._gameid
@@ -62,5 +62,5 @@ class FootballGame(object):
     def get_team2(self):
         return self._team2
 
-    def get_logic(self):
-        return self._logic
+    def get_simulation(self):
+        return self._simulation

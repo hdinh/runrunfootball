@@ -2,7 +2,7 @@ from unittest import TestCase
 from unittest.mock import Mock
 from runrunlib import FootballGame, FootballTeam
 from runrunlib.footballteam import not_set_team
-from runrunlib.footballlogic import football_logic
+from runrunlib.footballsimulation import football_simulation
 
 
 class FootballGameTests(TestCase):
@@ -13,12 +13,12 @@ class FootballGameTests(TestCase):
         # Assert
         self.assertEqual(game.get_gameid(), 40)
 
-    def test_logic_should_be_set_to_football(self):
+    def test_simulation_should_be_set_to_football(self):
         # Arrange
         game = FootballGame()
 
         # Assert
-        self.assertEqual(game.get_logic(), football_logic)
+        self.assertEqual(game.get_simulation(), football_simulation)
 
     def test_should_set_players_of_game(self):
         # Arrange & Act
@@ -79,9 +79,9 @@ class FootballGameTests(TestCase):
         winner = game_result.get_winner()
         self.assertTrue(winner.get_name() == 'team1' or winner.get_name() == 'team2')
 
-    def test_running_game_should_call_and_return_logic_rungame(self):
+    def test_running_game_should_call_and_return_simulation_rungame(self):
         # Arrange & Act
-        mock_logic = Mock(spec=type(football_logic))
+        mock_simulation = Mock(spec=type(football_simulation))
         team1 = FootballTeam(name='team1')
         team2 = FootballTeam(name='team2')
 
@@ -89,8 +89,8 @@ class FootballGameTests(TestCase):
         game_result = FootballGame() \
                         .team1(team1) \
                         .team2(team2) \
-                        .logic(mock_logic) \
+                        .simulation(mock_simulation) \
                         .run()
 
         # Assert
-        mock_logic.run_game.assert_called_once_with(team1=team1, team2=team2)
+        mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2)
