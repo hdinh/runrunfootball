@@ -1,0 +1,2 @@
+class FootballGame(object):
+    pass
