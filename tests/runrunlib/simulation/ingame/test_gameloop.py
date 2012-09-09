@@ -1,10 +1,7 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
 from runrunlib import FootballTeam
-from runrunlib.simulation.ingame.gameloop import simulate_once, \
-                                                 simulate_until, \
-                                                 simulate_until_end, \
-                                                 QuarterStartEvent
+from runrunlib.simulation.ingame.gameloop import simulate_once
 from runrunlib.simulation.ingame.kickoff import KickOffEvent
 
 

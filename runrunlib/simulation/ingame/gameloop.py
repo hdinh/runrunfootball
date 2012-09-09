@@ -22,11 +22,6 @@ def simulate_once(state):
 
     return state
 
-
-class QuarterStartEvent(Event):
-    def __init__(self, quarter):
-        Event.__init__(self, 'Quarter ' + str(quarter) + ' has started')
-
 def _stop_on(f):
     def f_wrapped(state):
         state2 = f(state)
@@ -40,11 +35,12 @@ def _cont_on(f):
     return f_wrapped
 
 
-
 from .quarterchanged import quarter_changed
 from .quarterbanner import quarter_banner
 from .kickoff import kickoff
+from .simulatefootballplay import simulate_football_play
 
 _pipeline = (_stop_on(quarter_changed),
              _cont_on(quarter_banner),
-             _stop_on(kickoff))
+             _stop_on(kickoff),
+             _stop_on(simulate_football_play))

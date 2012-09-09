@@ -13,7 +13,7 @@ class QuarterChangedTests(TestCase):
                     .team2(FootballTeam('teamb')) \
                     .quarter(1) \
                     .quarter_time(40000) \
-                    .time(40000) \
+                    .time(40000)
 
         # Act
         state2 = simulate_once(state)
@@ -28,10 +28,14 @@ class QuarterChangedTests(TestCase):
                     .team2(FootballTeam('teamb')) \
                     .quarter(1) \
                     .quarter_time(1000) \
-                    .time(1) \
+                    .time(1)
 
         # Act
         state2 = simulate_once(state)
 
         # Assert
         self.assertFalse(QuarterChangedEvent in map(lambda e: type(e), state2.get_events()))
+
+
+if __name__ == '__main__':
+    main()
