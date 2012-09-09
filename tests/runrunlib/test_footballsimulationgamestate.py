@@ -1,5 +1,6 @@
 from unittest import TestCase, main
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
+from runrunlib.footballsimulationgamestate import FootballSimulationGameState, \
+                                                  ViewOnlyFootballSimulationGameState
 from runrunlib import FootballTeam, Event
 
 
@@ -163,6 +164,37 @@ class FootballSimulationGameStateTests(TestCase):
 
         # Assert
         self.assertEqual(state.get_quarter_time(), 300)
+
+    def test_get_view_only_state(self):
+        # Arrange & Act
+        teama = FootballTeam('teama')
+        teamb = FootballTeam('teamb')
+        state = FootballSimulationGameState() \
+                    .gameid(40) \
+                    .team1(teama) \
+                    .team2(teamb) \
+                    .possession(teama) \
+                    .quarter_count(4) \
+                    .quarter(3) \
+                    .quarter_time(300) \
+                    .time(100) \
+                    .get_view_only_state()
+
+        # Assert
+        self.assertEqual(state.get_gameid(), 40)
+        self.assertEqual(state.get_team1().get_name(), 'teama')
+        self.assertEqual(state.get_team2().get_name(), 'teamb')
+        self.assertEqual(state.get_possession().get_name(), 'teama')
+        self.assertEqual(state.get_nonpossession().get_name(), 'teamb')
+        self.assertFalse(hasattr(state.get_team1(), 'get_controller'))
+        self.assertFalse(hasattr(state.get_team2(), 'get_controller'))
+        self.assertFalse(hasattr(state.get_possession(), 'get_controller'))
+        self.assertFalse(hasattr(state.get_nonpossession(), 'get_controller'))
+        self.assertEqual(state.get_quarter_count(), 4)
+        self.assertEqual(state.get_quarter(), 3)
+        self.assertEqual(state.get_quarter_time(), 300)
+        self.assertEqual(state.get_time(), 100)
+        self.assertIsInstance(state, ViewOnlyFootballSimulationGameState)
 
 
 if __name__ == '__main__':

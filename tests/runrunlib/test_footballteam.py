@@ -1,7 +1,8 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
 from runrunlib import FootballTeam, FootballTeamController
-from runrunlib.footballteam import not_set_team
+from runrunlib.footballteam import not_set_team, \
+                                   ViewOnlyFootballTeam
 
 
 class FootballTeamTests(TestCase):
@@ -46,6 +47,18 @@ class FootballTeamTests(TestCase):
 
         # Assert
         self.assertFalse(team.get_controller().is_set())
+
+    def test_get_view_only_team(self):
+        # Arrange & Act
+        controller = Mock(spec=FootballTeamController)
+        team = FootballTeam() \
+                .name('team123') \
+                .controller(controller) \
+                .get_view_only_team()
+
+        # Assert
+        self.assertEqual(team.get_name(), 'team123')
+        self.assertFalse(hasattr(team, 'get_controller'))
 
 
 if __name__ == '__main__':

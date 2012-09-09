@@ -2,8 +2,8 @@ from . import FootballPlayOutcomeEvent
 
 def sim(state):
     """
-    play1 = state.get_possession().get_controller().choose_play()
-    play2 = state.get_nonpossession().get_controller().choose_play()
+    play1 = state.get_possession().get_controller().choose_play(state.get_stateview())
+    play2 = state.get_nonpossession().get_controller().choose_play(state.get_stateview())
 
     expected_gain = get_expected_gain()
     play_choose_points, t1 = compute_play_choose()

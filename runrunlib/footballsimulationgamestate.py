@@ -3,8 +3,59 @@ from .footballteam import not_set_team
 DEFAULT_QUARTER_COUNT = 4
 DEFAULT_QUARTER_TIME = 60*15
 
+class _FootballSimulationGameStateBase(object):
+    def __init__(self,
+                 gameid,
+                 quarter_count,
+                 quarter_time,
+                 team1,
+                 team2,
+                 possession,
+                 time,
+                 quarter,
+                 events):
+        self._gameid = gameid
+        self._quarter_count = quarter_count
+        self._quarter_time = quarter_time
+        self._team1 = team1
+        self._team2 = team2
+        self._possession = possession
+        self._time = time
+        self._quarter = quarter
+        self._events = events
 
-class FootballSimulationGameState(object):
+    def get_gameid(self):
+        return self._gameid
+
+    def get_quarter_count(self):
+        return self._quarter_count
+
+    def get_quarter_time(self):
+        return self._quarter_time
+
+    def get_team1(self):
+        return self._team1
+
+    def get_team2(self):
+        return self._team2
+
+    def get_possession(self):
+        return self._possession
+
+    def get_nonpossession(self):
+        return self._team1 if self._possession == self._team2 else self._team2
+
+    def get_time(self):
+        return self._time
+
+    def get_quarter(self):
+        return self._quarter
+
+    def get_events(self):
+        return self._events
+
+
+class FootballSimulationGameState(_FootballSimulationGameStateBase):
     def __init__(self,
                  gameid=-1,
                  quarter_count=DEFAULT_QUARTER_COUNT,
@@ -15,15 +66,16 @@ class FootballSimulationGameState(object):
                  time=0,
                  quarter=1,
                  events=()):
-        self._gameid = gameid
-        self._quarter_count = quarter_count
-        self._quarter_time = quarter_time
-        self._team1 = team1
-        self._team2 = team2
-        self._possession = possession
-        self._time = time
-        self._quarter = quarter
-        self._events = events
+        _FootballSimulationGameStateBase.__init__(self,
+                                                  gameid,
+                                                  quarter_count,
+                                                  quarter_time,
+                                                  team1,
+                                                  team2,
+                                                  possession,
+                                                  time,
+                                                  quarter,
+                                                  events)
 
     def gameid(self, gameid):
         if self._gameid != -1:
@@ -139,32 +191,36 @@ class FootballSimulationGameState(object):
                                            quarter=self._quarter,
                                            events=self._events + (event,))
 
-    def get_gameid(self):
-        return self._gameid
+    def get_view_only_state(self):
+        return ViewOnlyFootballSimulationGameState(gameid=self._gameid,
+                                                   quarter_count=self._quarter_count,
+                                                   quarter_time=self._quarter_time,
+                                                   team1=self._team1.get_view_only_team(),
+                                                   team2=self._team2.get_view_only_team(),
+                                                   possession=self._possession.get_view_only_team(),
+                                                   time=self._time,
+                                                   quarter=self._quarter,
+                                                   events=self._events)
 
-    def get_quarter_count(self):
-        return self._quarter_count
 
-    def get_quarter_time(self):
-        return self._quarter_time
-
-    def get_team1(self):
-        return self._team1
-
-    def get_team2(self):
-        return self._team2
-
-    def get_possession(self):
-        return self._possession
-
-    def get_nonpossession(self):
-        return self._team1 if self._possession == self._team2 else self._team2
-
-    def get_time(self):
-        return self._time
-
-    def get_quarter(self):
-        return self._quarter
-
-    def get_events(self):
-        return self._events
+class ViewOnlyFootballSimulationGameState(_FootballSimulationGameStateBase):
+    def __init__(self,
+                 gameid,
+                 quarter_count,
+                 quarter_time,
+                 team1,
+                 team2,
+                 possession,
+                 time,
+                 quarter,
+                 events):
+        _FootballSimulationGameStateBase.__init__(self,
+                                                  gameid,
+                                                  quarter_count,
+                                                  quarter_time,
+                                                  team1,
+                                                  team2,
+                                                  possession,
+                                                  time,
+                                                  quarter,
+                                                  events)

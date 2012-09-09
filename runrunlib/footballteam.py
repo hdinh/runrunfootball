@@ -14,11 +14,18 @@ class NotSetController(FootballTeamController):
 not_set_controller = NotSetController()
 
 
-class FootballTeam(object):
+class _FootballTeamBase(object):
+    def __init__(self, name):
+        self._name = name
+
+    def get_name(self):
+        return self._name
+
+class FootballTeam(_FootballTeamBase):
     def __init__(self,
                  name='NotNamed',
                  controller=not_set_controller):
-        self._name = name
+        _FootballTeamBase.__init__(self, name)
         self._controller = controller
 
     def name(self, name):
@@ -29,14 +36,19 @@ class FootballTeam(object):
         return FootballTeam(name=self._name,
                             controller=controller)
 
-    def get_name(self):
-        return self._name
-
     def get_controller(self):
         return self._controller
 
+    def get_view_only_team(self):
+        return ViewOnlyFootballTeam(self._name)
+
     def is_set(self):
         return True
+
+
+class ViewOnlyFootballTeam(_FootballTeamBase):
+    def __init__(self, name):
+        _FootballTeamBase.__init__(self, name)
 
 
 class NotSetTeam(object):
