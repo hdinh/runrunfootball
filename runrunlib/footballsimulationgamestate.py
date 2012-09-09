@@ -1,5 +1,6 @@
 from .footballteam import not_set_team
 
+
 class FootballSimulationGameState(object):
     def __init__(self,
                  gameid=-1,
@@ -43,7 +44,7 @@ class FootballSimulationGameState(object):
 
     def team2(self, team):
         if self._team2.is_set():
-            raise RuntimeError('team1 already set')
+            raise RuntimeError('team2 already set')
 
         return FootballSimulationGameState(gameid=self._gameid,
                                            team1=self._team1,
@@ -94,7 +95,6 @@ class FootballSimulationGameState(object):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events + (event,))
-
 
     def get_gameid(self):
         return self._gameid

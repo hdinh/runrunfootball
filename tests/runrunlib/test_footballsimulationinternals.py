@@ -2,8 +2,10 @@ from unittest import TestCase, main
 from runrunlib.footballsimulationinternals import process_state, \
                                                   _game_start_banner, \
                                                   _coin_flip, \
+                                                  _kickoff, \
                                                   GameStartBannerEvent, \
-                                                  CoinFlipEvent
+                                                  CoinFlipEvent, \
+                                                  KickOffEvent
 from runrunlib.footballsimulation import FootballSimulationGameState
 from runrunlib import FootballTeam
 
@@ -59,17 +61,29 @@ class CoinFlipTests(TestCase):
 
     def test_should_add_coin_flip_event(self):
         # Arrange
-        teama = FootballTeam('teama')
-        teamb = FootballTeam('teamb')
         state = FootballSimulationGameState() \
-                    .team1(teama) \
-                    .team2(teamb)
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb'))
 
         # Act
         state2 = _coin_flip(state)
 
         # Assert
         self.assertIsInstance(state2.get_events()[-1], CoinFlipEvent)
+
+
+class KickoffTests(TestCase):
+    def test_should_kickoff_event(self):
+        # Arrange
+        state = FootballSimulationGameState() \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb'))
+
+        # Act
+        state2 = _kickoff(state)
+
+        # Assert
+        self.assertIsInstance(state2.get_events()[-1], KickOffEvent)
 
 
 if __name__ == '__main__':
