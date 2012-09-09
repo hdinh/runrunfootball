@@ -1,4 +1,5 @@
 from random import random
+from .event import Event
 
 def process_state(state):
     for processor in _process_chain:
@@ -14,8 +15,14 @@ def _coin_flip(state):
             winner = state.get_team1()
         else:
             winner = state.get_team2()
-        return state.possession(winner)
+
+        return state.event(CoinFlipEvent(winner.get_name() + ' won the coin flip')) \
+                    .possession(winner)
 
     return state
+
+class CoinFlipEvent(Event):
+    def __init__(self, description):
+        Event.__init__(self, description)
 
 _process_chain = [_game_banner, _coin_flip]
