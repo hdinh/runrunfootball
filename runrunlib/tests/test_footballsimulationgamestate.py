@@ -121,14 +121,28 @@ class FootballSimulationGameStateTests(TestCase):
         self.assertRaises(RuntimeError, state.quarter, 5)
 
     def test_should_add_event(self):
-        # Arrange
+        # Arrange & Act
         state = FootballSimulationGameState() \
                     .event(Event('my event 1')) \
                     .event(Event('second event'))
 
-        # Act
+        # Assert
         self.assertEqual(state.get_events()[0].get_description(), 'my event 1')
         self.assertEqual(state.get_events()[1].get_description(), 'second event')
+
+    def test_should_set_gameid(self):
+        # Arrange & Act
+        state = FootballSimulationGameState().gameid(100)
+
+        # Assert
+        self.assertEqual(state.get_gameid(), 100)
+
+    def test_set_game_should_throw_error_if_already_set(self):
+        # Arrange & Act
+        state = FootballSimulationGameState().gameid(100)
+
+        # Assert
+        self.assertRaises(RuntimeError, state.gameid, 101)
 
 
 if __name__ == '__main__':

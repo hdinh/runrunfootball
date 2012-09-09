@@ -1,7 +1,8 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationinternals import process_state, \
-                                                  _game_banner, \
+                                                  _game_start_banner, \
                                                   _coin_flip, \
+                                                  GameStartBannerEvent, \
                                                   CoinFlipEvent
 from runrunlib.footballsimulation import FootballSimulationGameState
 from runrunlib import FootballTeam
@@ -9,6 +10,19 @@ from runrunlib import FootballTeam
 
 class FootballSimulationInteralsTest(TestCase):
     pass
+
+class GameStartEventBannerTests(TestCase):
+    def test_should_add_game_start_event_banner_event(self):
+        # Arrange
+        state = FootballSimulationGameState() \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb'))
+
+        # Act
+        state2 = _game_start_banner(state)
+
+        # Assert
+        self.assertIsInstance(state2.get_events()[-1], GameStartBannerEvent)
 
 
 class CoinFlipTests(TestCase):
@@ -43,7 +57,7 @@ class CoinFlipTests(TestCase):
         # Assert
         self.assertEqual(state2.get_possession(), teamb)
 
-    def test_should_add_gameevent(self):
+    def test_should_add_coin_flip_event(self):
         # Arrange
         teama = FootballTeam('teama')
         teamb = FootballTeam('teamb')
