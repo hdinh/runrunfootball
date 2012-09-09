@@ -30,18 +30,21 @@ class QuarterStartEvent(Event):
 def _stop_on(f):
     def f_wrapped(state):
         state2 = f(state)
-        should_continue = state2 == state
+        should_continue = state2 != state
         return state2, should_continue
     return f_wrapped
 
 def _cont_on(f):
     def f_wrapped(state):
-        return f(state), True
+        return f(state), False
     return f_wrapped
 
 
 
-from .kickoff import kickoff
+from .quarterchanged import quarter_changed
 from .quarterbanner import quarter_banner
-_pipeline = (_stop_on(kickoff),
-             _cont_on(quarter_banner))
+from .kickoff import kickoff
+
+_pipeline = (_stop_on(quarter_changed),
+             _cont_on(quarter_banner),
+             _stop_on(kickoff))
