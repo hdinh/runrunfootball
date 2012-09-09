@@ -2,6 +2,8 @@ from . import FootballPlayOutcomeEvent
 
 def sim(state):
     """
+    selection_type = footballrules.get_play_type(state)
+
     play1 = state.get_possession().get_controller().choose_play(state.get_stateview())
     play2 = state.get_nonpossession().get_controller().choose_play(state.get_stateview())
 

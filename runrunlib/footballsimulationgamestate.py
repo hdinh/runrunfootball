@@ -167,8 +167,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            events=self._events)
 
     def quarter(self, quarter):
-        if quarter <= 0 or quarter >= 5:
-            raise RuntimeError('quarter must be between 1 and 4')
+        if quarter <= 0:
+            raise RuntimeError('quarter must be greater than 0')
 
         return FootballSimulationGameState(gameid=self._gameid,
                                            quarter_count=self._quarter_count,

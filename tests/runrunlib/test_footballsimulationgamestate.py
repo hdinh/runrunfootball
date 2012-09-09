@@ -125,7 +125,6 @@ class FootballSimulationGameStateTests(TestCase):
         # Assert
         self.assertRaises(RuntimeError, state.quarter, -1)
         self.assertRaises(RuntimeError, state.quarter, 0)
-        self.assertRaises(RuntimeError, state.quarter, 5)
 
     def test_should_add_event(self):
         # Arrange & Act
