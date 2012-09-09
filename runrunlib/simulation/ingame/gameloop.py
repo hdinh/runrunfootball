@@ -34,17 +34,14 @@ def _stop_on(f):
         return state2, should_continue
     return f_wrapped
 
-def _conintue_on(f):
+def _cont_on(f):
     def f_wrapped(state):
-        state2 = f(state)
-        should_continue = state2 != state
-        return state2, should_continue
+        return f(state), True
     return f_wrapped
 
 
 
 from .kickoff import kickoff
-_pipeline = (_stop_on(kickoff,),)
-             #continue_on(
-
-simulate_to_end = simulate_until_end
+from .quarterbanner import quarter_banner
+_pipeline = (_stop_on(kickoff),
+             _cont_on(quarter_banner))
