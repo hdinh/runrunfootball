@@ -1,9 +1,14 @@
 from .footballteam import not_set_team
 
+DEFAULT_QUARTER_COUNT = 4
+DEFAULT_QUARTER_TIME = 60*15
+
 
 class FootballSimulationGameState(object):
     def __init__(self,
                  gameid=-1,
+                 quarter_count=DEFAULT_QUARTER_COUNT,
+                 quarter_time=DEFAULT_QUARTER_TIME,
                  team1=not_set_team,
                  team2=not_set_team,
                  possession=not_set_team,
@@ -11,6 +16,8 @@ class FootballSimulationGameState(object):
                  quarter=1,
                  events=()):
         self._gameid = gameid
+        self._quarter_count = quarter_count
+        self._quarter_time = quarter_time
         self._team1 = team1
         self._team2 = team2
         self._possession = possession
@@ -23,6 +30,30 @@ class FootballSimulationGameState(object):
             raise RuntimeError('gameid already set')
 
         return FootballSimulationGameState(gameid=gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
+                                           team1=self._team1,
+                                           team2=self._team2,
+                                           possession=self._possession,
+                                           time=self._time,
+                                           quarter=self._quarter,
+                                           events=self._events)
+
+    def quarter_count(self, quarter_count):
+        return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=quarter_count,
+                                           quarter_time=self._quarter_time,
+                                           team1=self._team1,
+                                           team2=self._team2,
+                                           possession=self._possession,
+                                           time=self._time,
+                                           quarter=self._quarter,
+                                           events=self._events)
+
+    def quarter_time(self, quarter_time):
+        return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=quarter_time,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -35,6 +66,8 @@ class FootballSimulationGameState(object):
             raise RuntimeError('team1 already set')
 
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=team,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -47,6 +80,8 @@ class FootballSimulationGameState(object):
             raise RuntimeError('team2 already set')
 
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=self._team1,
                                            team2=team,
                                            possession=self._possession,
@@ -59,6 +94,8 @@ class FootballSimulationGameState(object):
             raise RuntimeError('can only set possession to team1 or team2')
         
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=team,
@@ -68,6 +105,8 @@ class FootballSimulationGameState(object):
 
     def time(self, time):
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -80,6 +119,8 @@ class FootballSimulationGameState(object):
             raise RuntimeError('quarter must be between 1 and 4')
 
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -89,6 +130,8 @@ class FootballSimulationGameState(object):
 
     def event(self, event):
         return FootballSimulationGameState(gameid=self._gameid,
+                                           quarter_count=self._quarter_count,
+                                           quarter_time=self._quarter_time,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -99,6 +142,12 @@ class FootballSimulationGameState(object):
     def get_gameid(self):
         return self._gameid
 
+    def get_quarter_count(self):
+        return self._quarter_count
+
+    def get_quarter_time(self):
+        return self._quarter_time
+
     def get_team1(self):
         return self._team1
 
@@ -107,6 +156,9 @@ class FootballSimulationGameState(object):
 
     def get_possession(self):
         return self._possession
+
+    def get_nonpossession(self):
+        return self._team1 if self._possession == self._team2 else self._team2
 
     def get_time(self):
         return self._time

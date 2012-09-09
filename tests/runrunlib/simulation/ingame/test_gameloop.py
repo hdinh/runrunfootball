@@ -1,22 +1,22 @@
 from unittest import TestCase, main
-from runrunlib.simulation.ingame.kickoff import kickoff, \
-                                                KickOffEvent
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
 from runrunlib import FootballTeam
+from runrunlib.simulation.ingame.gameloop import simulate_until_end, \
+                                                 QuarterStartEvent
 
 
-class KickoffTests(TestCase):
-    def test_should_kickoff_event(self):
+class GameLoopTests(TestCase):
+    def test_(self):
         # Arrange
         state = FootballSimulationGameState() \
                     .team1(FootballTeam('teama')) \
-                    .team2(FootballTeam('teamb'))
+                    .team2(FootballTeam('teamb')) \
+                    .quarter(3)
 
         # Act
-        state2 = kickoff(state)
+        state2 = simulate_until_end(state)
 
         # Assert
-        self.assertIsInstance(state2.get_events()[-1], KickOffEvent)
 
 
 if __name__ == '__main__':

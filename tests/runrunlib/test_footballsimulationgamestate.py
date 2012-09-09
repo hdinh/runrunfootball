@@ -25,6 +25,13 @@ class FootballSimulationGameStateTests(TestCase):
         # Assert
         self.assertFalse(state.get_possession().is_set())
 
+    def test_get_nonpossession_should_be_not_set_at_constructor(self):
+        # Arrange
+        state = state = FootballSimulationGameState()
+
+        # Assert
+        self.assertFalse(state.get_nonpossession().is_set())
+
     def test_get_team_should_be_not_set_at_constructor(self):
         # Arrange
         state = FootballSimulationGameState()
@@ -99,6 +106,7 @@ class FootballSimulationGameStateTests(TestCase):
 
         # Assert
         self.assertEqual(state.get_possession(), teama)
+        self.assertEqual(state.get_nonpossession(), teamb)
 
     def test_set_possession_should_throw_error_if_team_not_1_or_2(self):
         # Arrange
@@ -143,6 +151,20 @@ class FootballSimulationGameStateTests(TestCase):
 
         # Assert
         self.assertRaises(RuntimeError, state.gameid, 101)
+
+    def test_should_set_quarter_count(self):
+        # Arrange & Act
+        state = FootballSimulationGameState().quarter_count(3)
+
+        # Assert
+        self.assertEqual(state.get_quarter_count(), 3)
+
+    def test_should_set_quarter_time(self):
+        # Arrange & Act
+        state = FootballSimulationGameState().quarter_time(300)
+
+        # Assert
+        self.assertEqual(state.get_quarter_time(), 300)
 
 
 if __name__ == '__main__':
