@@ -10,7 +10,9 @@ class KickoffTests(TestCase):
         # Arrange
         state = FootballSimulationGameState() \
                     .team1(FootballTeam('teama')) \
-                    .team2(FootballTeam('teamb'))
+                    .team2(FootballTeam('teamb')) \
+                    .quarter(1) \
+                    .time(0)
 
         # Act
         state2 = kickoff(state)

@@ -110,11 +110,9 @@ class FootballSimulationGameStateTests(TestCase):
 
     def test_set_possession_should_throw_error_if_team_not_1_or_2(self):
         # Arrange
-        teama = FootballTeam('teama')
-        teamb = FootballTeam('teamb')
         state = FootballSimulationGameState() \
-                    .team1(teama) \
-                    .team2(teamb)
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb'))
 
         # Act & Assert
         self.assertRaises(RuntimeError, state.possession, FootballTeam('another'))
