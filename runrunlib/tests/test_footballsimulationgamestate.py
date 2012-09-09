@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import FootballTeam
+from runrunlib import FootballTeam, Event
 
 
 class FootballSimulationGameStateTests(TestCase):
@@ -32,6 +32,13 @@ class FootballSimulationGameStateTests(TestCase):
         # Assert
         self.assertFalse(state.get_team1().is_set())
         self.assertFalse(state.get_team2().is_set())
+
+    def test_get_events_should_be_zero_length_at_constructor(self):
+        # Arrange
+        state = FootballSimulationGameState()
+
+        # Assert
+        self.assertEqual(len(state.get_events()), 0)
 
     def test_should_set_time(self):
         # Arrange & Act
@@ -101,18 +108,28 @@ class FootballSimulationGameStateTests(TestCase):
                     .team1(teama) \
                     .team2(teamb)
 
-
         # Act & Assert
         self.assertRaises(RuntimeError, state.possession, FootballTeam('another'))
 
     def test_set_quarter_should_throw_error_if_out_of_range(self):
-        # Arrange & Act
+        # Arrange
         state = FootballSimulationGameState()
 
         # Assert
         self.assertRaises(RuntimeError, state.quarter, -1)
         self.assertRaises(RuntimeError, state.quarter, 0)
         self.assertRaises(RuntimeError, state.quarter, 5)
+
+    def test_should_add_event(self):
+        # Arrange
+        state = FootballSimulationGameState() \
+                    .event(Event('my event 1')) \
+                    .event(Event('second event'))
+
+        # Act
+        self.assertEqual(state.get_events()[0].get_description(), 'my event 1')
+        self.assertEqual(state.get_events()[1].get_description(), 'second event')
+
 
 if __name__ == '__main__':
     main()

@@ -5,8 +5,11 @@ def process_state(state):
         state = processor(state)
     return state
 
+def _game_banner(state):
+    return state
+
 def _coin_flip(state):
-    if state.get_time() == 0:
+    if state.get_time() == 0 and not state.get_possession().is_set():
         if random() >= 0.5:
             winner = state.get_team1()
         else:
@@ -15,4 +18,4 @@ def _coin_flip(state):
 
     return state
 
-_process_chain = [_coin_flip]
+_process_chain = [_game_banner, _coin_flip]

@@ -1,11 +1,17 @@
 from unittest import TestCase, main
-from runrunlib.footballsimulationinternals import process_state
+from runrunlib.footballsimulationinternals import process_state, \
+                                                  _game_banner, \
+                                                  _coin_flip
 from runrunlib.footballsimulation import FootballSimulationGameState
 from runrunlib import FootballTeam
 
 
 class FootballSimulationInteralsTest(TestCase):
-    def test_process_state_should_do_coin_flip_if_initial(self):
+    pass
+
+
+class CoinFlipTests(TestCase):
+    def test_should_do_set_possession_if_time_is_zero(self):
         # Arrange
         teama = FootballTeam('teama')
         teamb = FootballTeam('teamb')
@@ -16,10 +22,29 @@ class FootballSimulationInteralsTest(TestCase):
                     .quarter(1)
 
         # Act
-        state2 = process_state(state)
+        state2 = _coin_flip(state)
 
         # Assert
         self.assertTrue(state2.get_possession() in [teama, teamb])
+
+    def test_should_skip_if_possession_is_set(self):
+        # Arrange
+        teama = FootballTeam('teama')
+        teamb = FootballTeam('teamb')
+        state = FootballSimulationGameState() \
+                    .team1(teama) \
+                    .team2(teamb) \
+                    .possession(teamb)
+
+        # Act
+        state2 = _coin_flip(state)
+
+        # Assert
+        self.assertEqual(state2.get_possession(), teamb)
+
+    def test_should_add_gameevent(self):
+        # TODO
+        pass
 
 
 if __name__ == '__main__':
