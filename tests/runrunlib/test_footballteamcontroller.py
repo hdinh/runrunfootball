@@ -45,6 +45,14 @@ class CpuFootballTeamControllerTests(TestCase):
         # Assert
         self.assertIsInstance(play, NormalPlay)
 
+    def test_cpu_controller_is_set_should_be_true(self):
+        # Act & Assert
+        self.assertTrue(CpuFootballTeamController().is_set())
+
+    def test_non_set_controller_is_set_should_be_true(self):
+        # Act & Assert
+        self.assertFalse(not_set_controller.is_set())
+
 
 if __name__ == '__main__':
     main()

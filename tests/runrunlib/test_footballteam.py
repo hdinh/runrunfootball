@@ -28,6 +28,13 @@ class FootballTeamTests(TestCase):
         # Assert
         self.assertTrue(team.is_set())
 
+    def test_controller_should_be_cpu_at_constructor(self):
+        # Arrange & Act
+        team = FootballTeam()
+
+        # Assert
+        self.assertTrue(team.get_controller().is_set())
+
     def test_unset_team_should_have_name_unset(self):
         # Assert
         self.assertEqual(not_set_team.get_name(), 'NotSet')
@@ -41,13 +48,6 @@ class FootballTeamTests(TestCase):
 
         # Assert
         self.assertEqual(team.get_controller(), controller)
-
-    def test_controller_not_set_should_set_unset(self):
-        # Arrange & Act
-        team = FootballTeam()
-
-        # Assert
-        self.assertFalse(team.get_controller().is_set())
 
     def test_get_view_only_team(self):
         # Arrange & Act

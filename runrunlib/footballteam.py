@@ -1,4 +1,4 @@
-from .footballteamcontroller import not_set_controller
+from .footballteamcontroller import not_set_controller, default_controller_method
 
 
 class _FootballTeamBase(object):
@@ -12,8 +12,11 @@ class _FootballTeamBase(object):
 class FootballTeam(_FootballTeamBase):
     def __init__(self,
                  name='NotNamed',
-                 controller=not_set_controller):
+                 controller=None):
         _FootballTeamBase.__init__(self, name)
+
+        if controller == None:
+            controller = default_controller_method()
         self._controller = controller
 
     def name(self, name):

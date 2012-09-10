@@ -141,6 +141,9 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            quarter=self._quarter,
                                            events=self._events)
 
+    def possession_index(self, idx):
+        return self.possession(self._team1 if idx == 0 else self.team2)
+
     def possession(self, team):
         if team not in [self._team1, self._team2]:
             raise RuntimeError('can only set possession to team1 or team2')

@@ -11,6 +11,7 @@ class GameLoopTests(TestCase):
         state = FootballSimulationGameState() \
                     .team1(FootballTeam('teama')) \
                     .team2(FootballTeam('teamb')) \
+                    .possession_index(0) \
                     .quarter(1) \
                     .time(0)
 
@@ -25,6 +26,7 @@ class GameLoopTests(TestCase):
         state = FootballSimulationGameState() \
                     .team1(FootballTeam('teama')) \
                     .team2(FootballTeam('teamb')) \
+                    .possession_index(0) \
                     .quarter(1) \
                     .time(1)
 

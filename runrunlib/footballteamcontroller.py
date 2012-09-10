@@ -5,10 +5,6 @@ class FootballTeamController(object):
     def __init__(self):
         pass
 
-    def choose_play(self, play_type):
-        raise Error('not implemented')
-
-
 
 class CpuFootballTeamController(FootballTeamController):
     def choose_play(self, play_type, state):
@@ -30,3 +26,4 @@ class NotSetController(FootballTeamController):
 
 
 not_set_controller = NotSetController()
+default_controller_method = CpuFootballTeamController
