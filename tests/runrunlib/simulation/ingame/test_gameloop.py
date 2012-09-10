@@ -1,6 +1,7 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import FootballTeam, KickOffPlay, KickOffPlayOutcome
+from runrunlib import KickOffPlay, KickOffPlayOutcome
+from runrunlib.footballteam import FootballTeam
 from runrunlib.simulation.ingame.gameloop import simulate_once
 
 

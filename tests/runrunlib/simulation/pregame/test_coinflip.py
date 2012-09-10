@@ -2,7 +2,7 @@ from unittest import TestCase, main
 from runrunlib.simulation.pregame.coinflip import coin_flip, \
                                                   CoinFlipEvent
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import FootballTeam
+from runrunlib.footballteam import FootballTeam
 
 
 class CoinFlipTests(TestCase):

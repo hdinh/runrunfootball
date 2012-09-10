@@ -1,4 +1,7 @@
-from runrunlib import footballrules
+from runrunlib import footballrules, \
+                      KickOffPlay, \
+                      KickOffPlayOutcome, \
+                      NormalPlayOutcome
 
 def sim(state):
     play_type = footballrules.get_play_type(state)
@@ -17,9 +20,15 @@ def sim(state):
     #return state.event(outcome)
     from runrunlib import KickOffPlay, NormalPlay, KickOffPlayOutcome, NormalPlayOutcome
     if play_type == KickOffPlay:
-        return state.event(KickOffPlayOutcome())
+        return state.event(KickOffPlayOutcome(state.get_quarter(),
+                                              state.get_time(),
+                                              state.get_possession(),
+                                              state.get_nonpossession()))
     else:
-        return state.event(NormalPlayOutcome())
+        return state.event(NormalPlayOutcome(state.get_quarter(),
+                                             state.get_time(),
+                                             state.get_possession(),
+                                             state.get_nonpossession()))
 
 def do_mix(state):
     return NormalPlayOutcome('')

@@ -1,7 +1,8 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib import FootballTeam, FootballTeamController
+from runrunlib.footballteamcontroller import FootballTeamController
 from runrunlib.footballteam import not_set_team, \
+                                   FootballTeam, \
                                    ViewOnlyFootballTeam
 
 

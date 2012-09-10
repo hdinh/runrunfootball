@@ -1,14 +1,29 @@
-from .footballteam import FootballTeam, FootballTeamController
-from .footballgame import FootballGame
 from .event import Event
 
 
 class FootballPlay(object):
+    def __init__(self):
+        pass
+
+
+class KickOffPlay(FootballPlay):
+    def __init__(self):
+        FootballPlay.__init__(self)
+
+
+class NormalPlay(FootballPlay):
+    def __init__(self):
+        FootballPlay.__init__(self)
+
+
+class FootballPlayOutcome(Event):
     def __init__(self,
                  quarter,
                  time,
                  possession,
-                 nonpossession):
+                 nonpossession,
+                 description):
+        Event.__init__(self, description)
         self._quarter = quarter
         self._time = time
         self._possession = possession
@@ -27,37 +42,31 @@ class FootballPlay(object):
         return self._nonpossession
 
 
-class KickOffPlay(FootballPlay):
+class KickOffPlayOutcome(FootballPlayOutcome):
     def __init__(self,
                  quarter,
                  time,
                  possession,
-                 nonpossession):
-        FootballPlay.__init__(self,
-                              quarter,
-                              time,
-                              possession,
-                              nonpossession)
+                 nonpossession,
+                 description=''):
+        FootballPlayOutcome.__init__(self,
+                                     quarter,
+                                     time,
+                                     possession,
+                                     nonpossession,
+                                     description)
 
 
-class NormalPlay(FootballPlay):
+class NormalPlayOutcome(FootballPlayOutcome):
     def __init__(self,
                  quarter,
                  time,
                  possession,
-                 nonpossession):
-        FootballPlay.__init__(self,
-                              quarter,
-                              time,
-                              possession,
-                              nonpossession)
-
-
-class KickOffPlayOutcome(Event):
-    def __init__(self, description=''):
-        Event.__init__(self, description)
-
-
-class NormalPlayOutcome(Event):
-    def __init__(self, description=''):
-        Event.__init__(self, description)
+                 nonpossession,
+                 description=''):
+        FootballPlayOutcome.__init__(self,
+                                     quarter,
+                                     time,
+                                     possession,
+                                     nonpossession,
+                                     description)

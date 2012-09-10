@@ -1,6 +1,7 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import footballrules, KickOffPlay, NormalPlay, FootballTeam
+from runrunlib import footballrules, KickOffPlay, NormalPlay, KickOffPlayOutcome, NormalPlayOutcome
+from runrunlib.footballteam import FootballTeam
 
 
 class FootballRulesTests(TestCase):
@@ -43,22 +44,22 @@ class FootballRulesTests(TestCase):
         # Act & Assert
         self.assertNotEqual(KickOffPlay,
                             footballrules.get_play_type(state.quarter(3) \
-                                                             .event(KickOffPlay(quarter=3,
-                                                                                time=0,
-                                                                                possession=teama,
-                                                                                nonpossession=teamb))))
+                                                             .event(KickOffPlayOutcome(quarter=3,
+                                                                                       time=0,
+                                                                                       possession=teama,
+                                                                                       nonpossession=teamb))))
         self.assertNotEqual(KickOffPlay,
                             footballrules.get_play_type(state.quarter(3) \
-                                                             .event(NormalPlay(quarter=3,
-                                                                               time=0,
-                                                                               possession=teama,
-                                                                               nonpossession=teamb))))
+                                                             .event(NormalPlayOutcome(quarter=3,
+                                                                                      time=0,
+                                                                                      possession=teama,
+                                                                                      nonpossession=teamb))))
         self.assertEqual(KickOffPlay,
                          footballrules.get_play_type(state.quarter(3) \
-                                                          .event(NormalPlay(quarter=1,
-                                                                            time=0,
-                                                                            possession=teama,
-                                                                            nonpossession=teamb))))
+                                                          .event(NormalPlayOutcome(quarter=1,
+                                                                                   time=0,
+                                                                                   possession=teama,
+                                                                                   nonpossession=teamb))))
  
 
 

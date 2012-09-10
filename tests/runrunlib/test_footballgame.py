@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib import FootballGame, FootballTeam
-from runrunlib.footballteam import not_set_team
+from runrunlib.footballgame import FootballGame
+from runrunlib.footballteam import not_set_team, FootballTeam
 from runrunlib.footballsimulation import football_simulation
 
 

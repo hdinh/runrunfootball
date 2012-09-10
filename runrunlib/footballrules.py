@@ -1,4 +1,4 @@
-from . import KickOffPlay, NormalPlay, FootballPlay
+from . import KickOffPlay, NormalPlay, FootballPlay, FootballPlayOutcome
 
 
 def get_play_type(state):
@@ -13,6 +13,6 @@ def _play_exists(events, quarter):
     # TODO: This is O(n) on the events, we can improve
     #       by storing the quarter as the key in hashmap
     for event in events:
-        if issubclass(type(event), FootballPlay) and event.get_quarter() == quarter:
+        if issubclass(type(event), FootballPlayOutcome) and event.get_quarter() == quarter:
             return True
     return False

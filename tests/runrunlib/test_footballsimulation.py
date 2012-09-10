@@ -1,6 +1,7 @@
 from unittest import TestCase, skip, main
 from runrunlib.footballsimulation import FootballSimulationGame
-from runrunlib import FootballGame, FootballTeam
+from runrunlib.footballgame import FootballGame
+from runrunlib.footballteam import FootballTeam
 
 
 class FootballSimulationGameTests(TestCase):

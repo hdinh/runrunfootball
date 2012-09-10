@@ -1,17 +1,4 @@
-class FootballTeamController(object):
-    def __init__(self):
-        pass
-
-
-class NotSetController(FootballTeamController):
-    def __init__(self):
-        FootballTeamController.__init__(self)
-
-    def is_set(object):
-        return False
-
-
-not_set_controller = NotSetController()
+from .footballteamcontroller import not_set_controller
 
 
 class _FootballTeamBase(object):
@@ -20,6 +7,7 @@ class _FootballTeamBase(object):
 
     def get_name(self):
         return self._name
+
 
 class FootballTeam(_FootballTeamBase):
     def __init__(self,

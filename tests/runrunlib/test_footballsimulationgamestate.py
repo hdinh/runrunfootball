@@ -1,7 +1,8 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState, \
                                                   ViewOnlyFootballSimulationGameState
-from runrunlib import FootballTeam, Event
+from runrunlib import Event
+from runrunlib.footballteam import FootballTeam
 
 
 class FootballSimulationGameStateTests(TestCase):
