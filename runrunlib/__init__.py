@@ -16,6 +16,26 @@ class NormalPlay(FootballPlay):
         FootballPlay.__init__(self)
 
 
+class KickOffKickingPlay(KickOffPlay):
+    def __init__(self):
+        KickOffPlay.__init__(self)
+
+
+class KickOffReceivingPlay(KickOffPlay):
+    def __init__(self):
+        KickOffPlay.__init__(self)
+
+
+class OffensePlay(NormalPlay):
+    def __init__(self):
+        NormalPlay.__init__(self)
+
+
+class DefensePlay(NormalPlay):
+    def __init__(self):
+        DefensePlay.__init__(self)
+
+
 class FootballPlayOutcome(Event):
     def __init__(self,
                  quarter,
