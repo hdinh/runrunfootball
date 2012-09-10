@@ -1,7 +1,12 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
 from runrunlib.footballplaybook import FootballPlaybook
-from runrunlib import KickOffPlay, NormalPlay, OffensePlay, DefensePlay
+from runrunlib import KickOffPlay, \
+                      NormalPlay, \
+                      OffensePlay, \
+                      DefensePlay, \
+                      KickOffKickingPlay, \
+                      KickOffReceivingPlay
 
 
 class FootballPlaybookTests(TestCase):
@@ -62,6 +67,52 @@ class FootballPlaybookTests(TestCase):
 
         # Assert
         self.assertFalse(play in playbook.get_defense_plays())
+
+    def test_add_kickoff_receiving_play_should_be_able_to_add(self):
+        # Arrange
+        play = Mock(spec=KickOffReceivingPlay)
+
+        # Act
+        playbook = FootballPlaybook() \
+                    .add_kickoff_receiving_play(play)
+
+        # Assert
+        self.assertTrue(play in playbook.get_kickoff_receiving_plays())
+
+    def test_remove_kickoff_receiving_play_be_able_to_remove(self):
+        # Arrange
+        play = Mock(spec=KickOffReceivingPlay)
+
+        # Act
+        playbook = FootballPlaybook() \
+                    .add_kickoff_receiving_play(play) \
+                    .remove_kickoff_receiving_play(play)
+
+        # Assert
+        self.assertFalse(play in playbook.get_kickoff_receiving_plays())
+
+    def test_add_kickoff_kicking_play_should_be_able_to_add(self):
+        # Arrange
+        play = Mock(spec=KickOffKickingPlay)
+
+        # Act
+        playbook = FootballPlaybook() \
+                    .add_kickoff_kicking_play(play)
+
+        # Assert
+        self.assertTrue(play in playbook.get_kickoff_kicking_plays())
+
+    def test_remove_kickoff_kicking_play_be_able_to_remove(self):
+        # Arrange
+        play = Mock(spec=KickOffKickingPlay)
+
+        # Act
+        playbook = FootballPlaybook() \
+                    .add_kickoff_kicking_play(play) \
+                    .remove_kickoff_kicking_play(play)
+
+        # Assert
+        self.assertFalse(play in playbook.get_kickoff_kicking_plays())
 
 
 if __name__ == '__main__':
