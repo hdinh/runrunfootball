@@ -1,19 +1,27 @@
 from .footballteamcontroller import not_set_controller, default_controller_method
+from .footballplaybook import default_playbook
 
 
 class _FootballTeamBase(object):
-    def __init__(self, name):
+    def __init__(self,
+                 name,
+                 playbook):
         self._name = name
+        self._playbook = playbook
 
     def get_name(self):
         return self._name
+
+    def get_playbook(self):
+        return self._playbook
 
 
 class FootballTeam(_FootballTeamBase):
     def __init__(self,
                  name='NotNamed',
-                 controller=None):
-        _FootballTeamBase.__init__(self, name)
+                 controller=None,
+                 playbook=default_playbook):
+        _FootballTeamBase.__init__(self, name, playbook)
 
         if controller == None:
             controller = default_controller_method()
@@ -21,25 +29,32 @@ class FootballTeam(_FootballTeamBase):
 
     def name(self, name):
         return FootballTeam(name=name,
-                            controller=self._controller)
+                            controller=self._controller,
+                            playbook=self._playbook)
 
     def controller(self, controller):
         return FootballTeam(name=self._name,
-                            controller=controller)
+                            controller=controller,
+                            playbook=self._playbook)
+
+    def playbook(self, playbook):
+        return FootballTeam(name=self._name,
+                            controller=self._controller,
+                            playbook=playbook)
 
     def get_controller(self):
         return self._controller
 
     def get_view_only_team(self):
-        return ViewOnlyFootballTeam(self._name)
+        return ViewOnlyFootballTeam(self._name, self._playbook)
 
     def is_set(self):
         return True
 
 
 class ViewOnlyFootballTeam(_FootballTeamBase):
-    def __init__(self, name):
-        _FootballTeamBase.__init__(self, name)
+    def __init__(self, name, playbook):
+        _FootballTeamBase.__init__(self, name, playbook)
 
 
 class NotSetTeam(object):

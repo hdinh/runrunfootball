@@ -10,13 +10,11 @@ from runrunlib.footballteamcontroller import not_set_controller, \
 class CpuFootballTeamControllerTests(TestCase):
     def test_choose_play_should_handle_kickoffplay(self):
         # Arrange
-        teama = FootballTeam('teama')
-        teamb = FootballTeam('teamb')
         controller = CpuFootballTeamController()
         state = FootballSimulationGameState() \
-                    .team1(teama) \
-                    .team2(teamb) \
-                    .possession(teama) \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb')) \
+                    .possession_index(0) \
                     .quarter(1) \
                     .get_view_only_state()
 
@@ -28,13 +26,11 @@ class CpuFootballTeamControllerTests(TestCase):
 
     def test_choose_play_should_handle_kickoffplay(self):
         # Arrange
-        teama = FootballTeam('teama')
-        teamb = FootballTeam('teamb')
         controller = CpuFootballTeamController()
         state = FootballSimulationGameState() \
-                    .team1(teama) \
-                    .team2(teamb) \
-                    .possession(teama) \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb')) \
+                    .possession_index(0) \
                     .quarter(1) \
                     .time(20) \
                     .get_view_only_state()
@@ -52,6 +48,10 @@ class CpuFootballTeamControllerTests(TestCase):
     def test_non_set_controller_is_set_should_be_true(self):
         # Act & Assert
         self.assertFalse(not_set_controller.is_set())
+
+    def test_should_only_choose_play_from_playbook(self):
+        # TODO
+        pass
 
 
 if __name__ == '__main__':

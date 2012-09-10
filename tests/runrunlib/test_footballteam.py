@@ -4,6 +4,8 @@ from runrunlib.footballteamcontroller import FootballTeamController
 from runrunlib.footballteam import not_set_team, \
                                    FootballTeam, \
                                    ViewOnlyFootballTeam
+from runrunlib.footballplaybook import FootballPlaybook, \
+                                       default_playbook
 
 
 class FootballTeamTests(TestCase):
@@ -60,6 +62,22 @@ class FootballTeamTests(TestCase):
         # Assert
         self.assertEqual(team.get_name(), 'team123')
         self.assertFalse(hasattr(team, 'get_controller'))
+
+    def test_should_set_playbook(self):
+        # Arrange & Act
+        playbook = FootballPlaybook()
+        team = FootballTeam() \
+                .playbook(playbook)
+
+        # Assert
+        self.assertEqual(team.get_playbook(), playbook)
+
+    def test_should_have_default_playbook_at_constructor(self):
+        # Arrange & Act
+        team = FootballTeam()
+
+        # Assert
+        self.assertEqual(team.get_playbook(), default_playbook)
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@ from runrunlib import footballrules, \
                       KickOffPlayOutcome, \
                       NormalPlayOutcome
 
+
 def sim(state):
     play_type = footballrules.get_play_type(state)
 
@@ -13,6 +14,9 @@ def sim(state):
                  .get_controller() \
                  .choose_play(play_type, state.get_view_only_state())
 
+    #if play1.get_play_type() == PlayType.Run:
+    #    return 5
+    #elif play
     #expected_gain = get_expected_gain()
     #play_choose_points, t1 = compute_play_choose()
     #offensive_quality_points, t2 = compute_offensive_quality()
@@ -31,6 +35,7 @@ def sim(state):
                                              state.get_time(),
                                              state.get_possession(),
                                              state.get_nonpossession()))
+
 
 def do_mix(state):
     return NormalPlayOutcome('')
