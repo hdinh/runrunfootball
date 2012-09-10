@@ -1,8 +1,7 @@
 from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import FootballTeam
+from runrunlib import FootballTeam, KickOffPlay, KickOffPlayOutcome
 from runrunlib.simulation.ingame.gameloop import simulate_once
-from runrunlib.simulation.ingame.kickoff import KickOffEvent
 
 
 class GameLoopTests(TestCase):
@@ -18,7 +17,7 @@ class GameLoopTests(TestCase):
         state2 = simulate_once(state)
 
         # Assert
-        self.assertTrue(KickOffEvent in map(lambda e: type(e), state2.get_events()))
+        self.assertTrue(KickOffPlayOutcome in map(lambda e: type(e), state2.get_events()))
 
     def test_should_not_do_kickoff_at_quarter1_time1(self):
         # Arrange
@@ -32,7 +31,7 @@ class GameLoopTests(TestCase):
         state2 = simulate_once(state)
 
         # Assert
-        self.assertFalse(KickOffEvent in map(lambda e: type(e), state2.get_events()))
+        self.assertFalse(KickOffPlayOutcome in map(lambda e: type(e), state2.get_events()))
 
 
 if __name__ == '__main__':

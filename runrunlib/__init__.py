@@ -51,3 +51,13 @@ class NormalPlay(FootballPlay):
                               time,
                               possession,
                               nonpossession)
+
+
+class KickOffPlayOutcome(Event):
+    def __init__(self, description=''):
+        Event.__init__(self, description)
+
+
+class NormalPlayOutcome(Event):
+    def __init__(self, description=''):
+        Event.__init__(self, description)

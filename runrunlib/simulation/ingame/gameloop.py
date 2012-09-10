@@ -37,10 +37,8 @@ def _cont_on(f):
 
 from .quarterchanged import quarter_changed
 from .quarterbanner import quarter_banner
-from .kickoff import kickoff
 from .simulatefootballplay import simulate_football_play
 
 _pipeline = (_stop_on(quarter_changed),
              _cont_on(quarter_banner),
-             _stop_on(kickoff),
              _stop_on(simulate_football_play))

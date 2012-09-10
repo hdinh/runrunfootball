@@ -1,7 +1,4 @@
-from .kickoff import kickoff
-from runrunlib.event import Event
-
-pipeline = (kickoff,)
+pipeline = []
 
 """
 pipeline = (kickoff,
@@ -15,7 +12,3 @@ pipeline = (kickoff,
             quarter(4),
             game_finished)
 """
-
-class FootballPlayOutcomeEvent(Event):
-    def __init__(self, description):
-        Event.__init__(self, description)

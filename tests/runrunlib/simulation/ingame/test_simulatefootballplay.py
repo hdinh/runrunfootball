@@ -2,7 +2,7 @@ from unittest import TestCase, main
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState
 from runrunlib import FootballTeam
 from runrunlib.simulation.ingame.gameloop import simulate_once
-from runrunlib.simulation.ingame import FootballPlayOutcomeEvent
+from runrunlib import NormalPlayOutcome
 
 
 class SimulateFootballPlayTests(TestCase):
@@ -20,7 +20,7 @@ class SimulateFootballPlayTests(TestCase):
         state2 = simulate_once(state)
 
         # Assert
-        self.assertIsInstance(state2.get_events()[-1], FootballPlayOutcomeEvent)
+        self.assertIsInstance(state2.get_events()[-1], NormalPlayOutcome)
         #self.assertTrue(state2.get_time() - state.get_time() > 0)
 
 
