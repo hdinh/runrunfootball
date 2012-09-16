@@ -3,6 +3,8 @@ from unittest.mock import Mock
 from runrunlib.footballgame import FootballGame
 from runrunlib.footballteam import not_set_team, FootballTeam
 from runrunlib.footballsimulation import football_simulation
+from runrunlib.footballgameclient import FootballGameClient
+from runrunlib.event import Event
 
 
 class FootballGameTests(TestCase):
@@ -94,6 +96,22 @@ class FootballGameTests(TestCase):
 
         # Assert
         mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2)
+
+    def test_add_client_should_add_client(self):
+        # Arrange
+        mock_client = Mock(spec=FootballGameClient)
+
+        team1 = FootballTeam(name='team1')
+        team2 = FootballTeam(name='team2')
+
+        # Act
+        game = FootballGame() \
+                .team1(team1) \
+                .team2(team2) \
+                .add_client(mock_client)
+
+        # Assert
+        self.assertTrue(mock_client in game.get_clients())
 
 
 if __name__ == '__main__':

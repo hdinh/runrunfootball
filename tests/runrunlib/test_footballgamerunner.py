@@ -1,11 +1,11 @@
 from unittest import TestCase, main
 from runrunlib.footballgame import FootballGame
-from runrunlib.footballgamerunner import FootballGameRunner
 from runrunlib.footballteam import FootballTeam
+#from runrunlib.footballgamerunner import FootballGameRunner
 
 
 class FootballGameRunner(TestCase):
-    def test_playgrond(self):
+    def _test_playgrond(self):
         # Arrange
         teama = FootballTeam('teama')
         teamb = FootballTeam('teamb')

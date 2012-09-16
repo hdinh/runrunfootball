@@ -4,6 +4,11 @@ from runrunlib.footballgame import FootballGame
 from runrunlib.footballteam import FootballTeam
 
 
+class FootballSimulationRunnerTests(TestCase):
+    def test_should_pass_event(self):
+        pass
+
+
 class FootballSimulationGameTests(TestCase):
     @skip("will do gameinternals first")
     def test_shit(self):

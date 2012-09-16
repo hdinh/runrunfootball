@@ -8,11 +8,13 @@ class FootballGame(object):
                  gameid=-1,
                  team1=not_set_team,
                  team2=not_set_team,
-                 simulation=football_simulation):
+                 simulation=football_simulation,
+                 clients=()):
         self._gameid = gameid
         self._team1 = team1
         self._team2 = team2
         self._simulation = simulation
+        self._clients = clients
 
     def run(self):
         if not self._team1.is_set():
@@ -29,7 +31,8 @@ class FootballGame(object):
         return FootballGame(gameid=gameid,
                             team1=self._team1,
                             team2=self._team2,
-                            simulation=self._simulation)
+                            simulation=self._simulation,
+                            clients=self._clients)
 
     def team1(self, team):
         if self._team1.is_set():
@@ -37,7 +40,8 @@ class FootballGame(object):
         return FootballGame(gameid=self._gameid,
                             team1=team,
                             team2=self._team2,
-                            simulation=self._simulation)
+                            simulation=self._simulation,
+                            clients=self._clients)
 
     def team2(self, team):
         if self._team2.is_set():
@@ -45,13 +49,22 @@ class FootballGame(object):
         return FootballGame(gameid=self._gameid,
                             team1=self._team1,
                             team2=team,
-                            simulation=self._simulation)
+                            simulation=self._simulation,
+                            clients=self._clients)
 
     def simulation(self, simulation):
         return FootballGame(gameid=self._gameid,
                             team1=self._team1,
                             team2=self._team2,
-                            simulation=simulation)
+                            simulation=simulation,
+                            clients=self._clients)
+
+    def add_client(self, client):
+        return FootballGame(gameid=self._gameid,
+                            team1=self._team1,
+                            team2=self._team2,
+                            simulation=self._simulation,
+                            clients=self._clients + (client,))
 
     def get_gameid(self):
         return self._gameid
@@ -64,3 +77,6 @@ class FootballGame(object):
 
     def get_simulation(self):
         return self._simulation
+
+    def get_clients(self):
+        return self._clients
