@@ -3,6 +3,7 @@ from .footballteam import not_set_team
 DEFAULT_QUARTER_COUNT = 4
 DEFAULT_QUARTER_TIME = 60*15
 
+
 class _FootballSimulationGameStateBase(object):
     def __init__(self,
                  gameid,

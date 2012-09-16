@@ -24,7 +24,7 @@ class CpuFootballTeamControllerTests(TestCase):
         # Assert
         self.assertIsInstance(play, KickOffPlay)
 
-    def test_choose_play_should_handle_kickoffplay(self):
+    def test_choose_play_should_handle_normalplay(self):
         # Arrange
         controller = CpuFootballTeamController()
         state = FootballSimulationGameState() \

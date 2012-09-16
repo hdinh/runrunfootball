@@ -95,5 +95,6 @@ class FootballGameTests(TestCase):
         # Assert
         mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2)
 
+
 if __name__ == '__main__':
     main()
