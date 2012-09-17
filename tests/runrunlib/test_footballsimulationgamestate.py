@@ -1,8 +1,10 @@
 from unittest import TestCase, main
+from unittest.mock import Mock
 from runrunlib.footballsimulationgamestate import FootballSimulationGameState, \
                                                   ViewOnlyFootballSimulationGameState
 from runrunlib import Event
 from runrunlib.footballteam import FootballTeam
+from runrunlib.footballgameclient import FootballGameClient
 
 
 class FootballSimulationGameStateTests(TestCase):
@@ -195,6 +197,23 @@ class FootballSimulationGameStateTests(TestCase):
         self.assertEqual(state.get_quarter_time(), 300)
         self.assertEqual(state.get_time(), 100)
         self.assertIsInstance(state, ViewOnlyFootballSimulationGameState)
+
+    def test_adding_client_should_add_callback_when_event_is_called(self):
+        # Arrange
+        mock_client = Mock(spec=FootballGameClient)
+
+        state = FootballSimulationGameState() \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb')) \
+                    .possession_index(0) \
+                    .add_client(mock_client)
+
+        # Act
+        event = Event('my event 1')
+        state.event(event)
+
+        # Assert
+        mock_client.on_event.assert_called_once_with(event)
 
 
 if __name__ == '__main__':

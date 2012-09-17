@@ -2,4 +2,5 @@
 
 
 class FootballGameClient(object):
-    pass
+    def on_event(self, event):
+        raise NotImplementedError()
