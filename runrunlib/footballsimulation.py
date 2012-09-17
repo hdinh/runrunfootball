@@ -3,18 +3,26 @@ from .footballsimulationgamestate import FootballSimulationGameState
 from .simulation import pipeline as simulation_pipeline
 
 
+def default_pipeline():
+    for gamestage_pipeline in simulation_pipeline:
+        for step in gamestage_pipeline:
+            yield step
+
+
 class FootballSimulationGame(object):
-    def __init__(self, team1, team2, clients=()):
+    def __init__(self, team1, team2, clients):
         self._team1 = team1
         self._team2 = team2
         self._clients = clients
 
-    def sim_game(self):
+    def sim_game(self, pipeline=default_pipeline):
         state = FootballSimulationGameState()
 
-        for gamestage_pipeline in simulation_pipeline:
-            for step in gamestage_pipeline:
-                self._state = step(state)
+        for client in self._clients:
+            state = state.add_client(client)
+
+        for step in pipeline():
+            state = step(state)
 
         return _FootballGameResult(self._team1)
 
