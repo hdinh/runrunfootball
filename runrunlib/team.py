@@ -1,5 +1,5 @@
-from .footballteamcontroller import not_set_controller, default_controller_method
-from .footballplaybook import default_playbook
+from .teamcontroller import not_set_controller, default_controller_method
+from .playbook import default_playbook
 
 
 class _FootballTeamBase(object):

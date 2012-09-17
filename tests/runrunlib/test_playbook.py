@@ -1,6 +1,6 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib.footballplaybook import FootballPlaybook
+from runrunlib.playbook import FootballPlaybook
 from runrunlib import KickOffPlay, \
                       NormalPlay, \
                       OffensePlay, \

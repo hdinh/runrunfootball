@@ -1,7 +1,7 @@
 from unittest import TestCase, main
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib import footballrules, KickOffPlay, NormalPlay, KickOffPlayOutcome, NormalPlayOutcome
-from runrunlib.footballteam import FootballTeam
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib import rules, KickOffPlay, NormalPlay, KickOffPlayOutcome, NormalPlayOutcome
+from runrunlib.team import FootballTeam
 
 
 class FootballRulesTests(TestCase):
@@ -12,7 +12,7 @@ class FootballRulesTests(TestCase):
                     .time(0)
 
         # Act & Assert
-        self.assertEqual(footballrules.get_play_type(state), KickOffPlay)
+        self.assertEqual(rules.get_play_type(state), KickOffPlay)
 
     def test_get_play_type_should_be_kickoff_at_time0_quarter3(self):
         # Arrange
@@ -21,7 +21,7 @@ class FootballRulesTests(TestCase):
                     .time(0)
 
         # Act & Assert
-        self.assertEqual(footballrules.get_play_type(state), KickOffPlay)
+        self.assertEqual(rules.get_play_type(state), KickOffPlay)
 
     def test_get_play_type_should_be_kickoff_at_time0_quarter5(self):
         # Arrange
@@ -30,7 +30,7 @@ class FootballRulesTests(TestCase):
                     .time(0)
 
         # Act & Assert
-        self.assertEqual(footballrules.get_play_type(state), KickOffPlay)
+        self.assertEqual(rules.get_play_type(state), KickOffPlay)
 
     def test_get_play_type_should_not_be_kickoff_at_time0_quarter3_if_already_kicked_off(self):
         # Arrange
@@ -43,19 +43,19 @@ class FootballRulesTests(TestCase):
 
         # Act & Assert
         self.assertNotEqual(KickOffPlay,
-                            footballrules.get_play_type(state.quarter(3) \
+                            rules.get_play_type(state.quarter(3) \
                                                              .event(KickOffPlayOutcome(quarter=3,
                                                                                        time=0,
                                                                                        possession=teama,
                                                                                        nonpossession=teamb))))
         self.assertNotEqual(KickOffPlay,
-                            footballrules.get_play_type(state.quarter(3) \
+                            rules.get_play_type(state.quarter(3) \
                                                              .event(NormalPlayOutcome(quarter=3,
                                                                                       time=0,
                                                                                       possession=teama,
                                                                                       nonpossession=teamb))))
         self.assertEqual(KickOffPlay,
-                         footballrules.get_play_type(state.quarter(3) \
+                         rules.get_play_type(state.quarter(3) \
                                                           .event(NormalPlayOutcome(quarter=1,
                                                                                    time=0,
                                                                                    possession=teama,
@@ -70,7 +70,7 @@ class FootballRulesTests(TestCase):
                     .time(1)
 
         # Act & Assert
-        self.assertNotEqual(footballrules.get_play_type(state), KickOffPlay)
+        self.assertNotEqual(rules.get_play_type(state), KickOffPlay)
 
 
 if __name__ == '__main__':

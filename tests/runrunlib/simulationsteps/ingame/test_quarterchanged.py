@@ -1,8 +1,8 @@
 from unittest import TestCase, main
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib.footballteam import FootballTeam
-from runrunlib.simulation.ingame.gameloop import simulate_once
-from runrunlib.simulation.ingame.quarterchanged import QuarterChangedEvent
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib.team import FootballTeam
+from runrunlib.simulationsteps.ingame.gameloop import simulate_once
+from runrunlib.simulationsteps.ingame.quarterchanged import QuarterChangedEvent
 
 
 class QuarterChangedTests(TestCase):

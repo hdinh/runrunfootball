@@ -1,8 +1,8 @@
 from unittest import TestCase, main
-from runrunlib.simulation.pregame.coinflip import coin_flip, \
+from runrunlib.simulationsteps.pregame.coinflip import coin_flip, \
                                                   CoinFlipEvent
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib.footballteam import FootballTeam
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib.team import FootballTeam
 
 
 class CoinFlipTests(TestCase):

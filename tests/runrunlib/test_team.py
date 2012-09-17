@@ -1,11 +1,11 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib.footballteamcontroller import FootballTeamController
-from runrunlib.footballteam import not_set_team, \
-                                   FootballTeam, \
-                                   ViewOnlyFootballTeam
-from runrunlib.footballplaybook import FootballPlaybook, \
-                                       default_playbook
+from runrunlib.teamcontroller import FootballTeamController
+from runrunlib.team import not_set_team, \
+                           FootballTeam, \
+                           ViewOnlyFootballTeam
+from runrunlib.playbook import FootballPlaybook, \
+                               default_playbook
 
 
 class FootballTeamTests(TestCase):

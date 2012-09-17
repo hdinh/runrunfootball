@@ -1,4 +1,4 @@
-from .footballteam import not_set_team
+from .team import not_set_team
 
 DEFAULT_QUARTER_COUNT = 4
 DEFAULT_QUARTER_TIME = 60*15

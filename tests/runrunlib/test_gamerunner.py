@@ -1,6 +1,6 @@
 from unittest import TestCase, main
-from runrunlib.footballgame import FootballGame
-from runrunlib.footballteam import FootballTeam
+from runrunlib.game import FootballGame
+from runrunlib.team import FootballTeam
 #from runrunlib.footballgamerunner import FootballGameRunner
 
 

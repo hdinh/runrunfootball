@@ -1,6 +1,6 @@
-from .footballgameresult import _FootballGameResult
-from .footballsimulationgamestate import FootballSimulationGameState
-from .simulation import pipeline as simulation_pipeline
+from .gameresult import _FootballGameResult
+from .simulationgamestate import FootballSimulationGameState
+from .simulationsteps import pipeline as simulation_pipeline
 
 
 def default_pipeline():

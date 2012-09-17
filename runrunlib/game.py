@@ -1,6 +1,6 @@
-from .footballteam import not_set_team
-from .footballsimulation import football_simulation
-from .footballgameresult import _FootballGameResult
+from .team import not_set_team
+from .simulation import football_simulation
+from .gameresult import _FootballGameResult
 
 
 class FootballGame(object):

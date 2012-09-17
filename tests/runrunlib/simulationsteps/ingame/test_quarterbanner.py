@@ -1,8 +1,8 @@
 from unittest import TestCase, main
-from runrunlib.simulation.ingame.quarterbanner import quarter_banner, \
-                                                      QuarterStartBannerEvent
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib.footballteam import FootballTeam
+from runrunlib.simulationsteps.ingame.quarterbanner import quarter_banner, \
+                                                           QuarterStartBannerEvent
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib.team import FootballTeam
 
 
 class QuarterBannerTests(TestCase):

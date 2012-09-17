@@ -1,9 +1,9 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib.footballgame import FootballGame
-from runrunlib.footballteam import not_set_team, FootballTeam
-from runrunlib.footballsimulation import football_simulation
-from runrunlib.footballgameclient import FootballGameClient
+from runrunlib.game import FootballGame
+from runrunlib.team import not_set_team, FootballTeam
+from runrunlib.simulation import football_simulation
+from runrunlib.gameclient import FootballGameClient
 from runrunlib.event import Event
 
 

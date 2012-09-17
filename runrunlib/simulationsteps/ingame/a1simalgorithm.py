@@ -1,11 +1,11 @@
-from runrunlib import footballrules, \
+from runrunlib import rules, \
                       KickOffPlay, \
                       KickOffPlayOutcome, \
                       NormalPlayOutcome
 
 
 def sim(state):
-    play_type = footballrules.get_play_type(state)
+    play_type = rules.get_play_type(state)
 
     play1 = state.get_possession() \
                  .get_controller() \

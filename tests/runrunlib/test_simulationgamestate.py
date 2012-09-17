@@ -1,10 +1,10 @@
 from unittest import TestCase, main
 from unittest.mock import Mock
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState, \
+from runrunlib.simulationgamestate import FootballSimulationGameState, \
                                                   ViewOnlyFootballSimulationGameState
 from runrunlib import Event
-from runrunlib.footballteam import FootballTeam
-from runrunlib.footballgameclient import FootballGameClient
+from runrunlib.team import FootballTeam
+from runrunlib.gameclient import FootballGameClient
 
 
 class FootballSimulationGameStateTests(TestCase):

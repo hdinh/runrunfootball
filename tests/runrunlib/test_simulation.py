@@ -1,11 +1,11 @@
 from unittest import TestCase, skip, main
 from unittest.mock import Mock
 from runrunlib import Event
-from runrunlib.footballsimulation import FootballSimulationGame
-from runrunlib.footballgame import FootballGame
-from runrunlib.footballteam import FootballTeam
-from runrunlib.footballsimulation import football_simulation
-from runrunlib.footballgameclient import FootballGameClient
+from runrunlib.simulation import FootballSimulationGame
+from runrunlib.game import FootballGame
+from runrunlib.team import FootballTeam
+from runrunlib.simulation import football_simulation
+from runrunlib.gameclient import FootballGameClient
 
 
 class FootballSimulationTests(TestCase):

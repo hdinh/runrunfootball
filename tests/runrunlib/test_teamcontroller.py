@@ -1,10 +1,10 @@
 from unittest import TestCase, main
 from runrunlib import KickOffPlay, NormalPlay
-from runrunlib.footballteam import FootballTeam
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib.footballteamcontroller import not_set_controller, \
-                                             FootballTeamController, \
-                                             CpuFootballTeamController
+from runrunlib.team import FootballTeam
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib.teamcontroller import not_set_controller, \
+                                     FootballTeamController, \
+                                     CpuFootballTeamController
 
 
 class CpuFootballTeamControllerTests(TestCase):

@@ -1,8 +1,8 @@
 from unittest import TestCase, main
-from runrunlib.simulation.pregame.pregamebanner import pregame_banner, \
+from runrunlib.simulationsteps.pregame.pregamebanner import pregame_banner, \
                                                        GameStartBannerEvent
-from runrunlib.footballsimulationgamestate import FootballSimulationGameState
-from runrunlib.footballteam import FootballTeam
+from runrunlib.simulationgamestate import FootballSimulationGameState
+from runrunlib.team import FootballTeam
 
 
 class PreGameBannerTests(TestCase):
