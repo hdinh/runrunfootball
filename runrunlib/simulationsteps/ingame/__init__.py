@@ -1,4 +1,7 @@
-pipeline = []
+from .gameloop import _pipeline
+
+pipeline = ()
+#pipeline = _pipeline
 
 """
 pipeline = (kickoff,
