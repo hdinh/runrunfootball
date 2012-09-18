@@ -2,6 +2,7 @@ from unittest import TestCase, main
 from runrunlib.simulationgamestate import FootballSimulationGameState
 from runrunlib import KickOffPlay, KickOffPlayOutcome
 from runrunlib.team import FootballTeam
+from runrunlib.ruleset import FootballRuleset
 from runrunlib.simulationsteps.ingame.gameloop import simulate_once, \
                                                       simulate_until, \
                                                       simulate_until_end
@@ -63,9 +64,32 @@ class GameLoopTests(TestCase):
         # Assert
         self.assertEqual(1, S.count)
 
-    def test_simulate_until_end_should_run_until_quarter_and_time_is_under(self):
-        # TODO
-        pass
+    def test_simulate_until_end_should_run_until_quarter_and_time_expires(self):
+        # Arrange
+        ruleset = FootballRuleset() \
+                    .quarter_count(2) \
+                    .quarter_time(100)
+
+        state = FootballSimulationGameState() \
+                    .ruleset(ruleset)
+
+        class S: pass
+        S.count = 0
+
+        def countcalls(state):
+            S.count += 1
+            if S.count >= 10:
+                state = state.quarter(10)
+            return state, True
+
+        def mock_pipeline():
+            yield countcalls
+
+        # Act
+        simulate_until_end(state, pipeline=mock_pipeline)
+
+        # Assert
+        self.assertEqual(10, S.count)
 
 
 if __name__ == '__main__':
