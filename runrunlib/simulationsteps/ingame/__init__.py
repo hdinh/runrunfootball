@@ -1,7 +1,7 @@
-from .gameloop import _pipeline
+from .gameloop import simulate_until_end
 
 pipeline = ()
-#pipeline = _pipeline
+#pipeline = (simulate_until_end,)
 
 """
 pipeline = (kickoff,
