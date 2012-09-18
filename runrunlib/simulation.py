@@ -10,26 +10,24 @@ def default_pipeline():
 
 
 class FootballSimulationGame(object):
-    def __init__(self, team1, team2, clients):
-        self._team1 = team1
-        self._team2 = team2
-        self._clients = clients
+    def __init__(self, game):
+        self._game = game
 
     def sim_game(self, pipeline=default_pipeline):
         state = FootballSimulationGameState()
 
-        for client in self._clients:
+        for client in self._game.get_clients():
             state = state.add_client(client)
 
         for step in pipeline():
             state = step(state)
 
-        return _FootballGameResult(self._team1)
+        return _FootballGameResult(self._game.get_team1())
 
 
 class _FootballSimulationRunner(object):
-    def run_game(self, team1, team2, clients=()):
-        simulation = FootballSimulationGame(team1, team2, clients)
+    def run_game(self, game):
+        simulation = FootballSimulationGame(game)
         return simulation.sim_game()
 
 

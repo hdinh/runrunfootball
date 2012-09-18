@@ -89,14 +89,14 @@ class FootballGameTests(TestCase):
         team2 = FootballTeam(name='team2')
 
         # Act
-        game_result = FootballGame() \
-                        .team1(team1) \
-                        .team2(team2) \
-                        .simulation(mock_simulation) \
-                        .run()
+        game = FootballGame() \
+                .team1(team1) \
+                .team2(team2) \
+                .simulation(mock_simulation)
+        game_result = game.run()
 
         # Assert
-        mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2, clients=ANY)
+        mock_simulation.run_game.assert_called_once_with(game)
 
     def test_add_client_should_return_client_when_get_clients(self):
         # Arrange
@@ -114,8 +114,8 @@ class FootballGameTests(TestCase):
     def test_add_client_should_get_events_from_simulation(self):
         # Arrange
         event = Event('my event')
-        def mock_run_game(team1, team2, clients):
-            for client in clients:
+        def mock_run_game(game):
+            for client in game.get_clients():
                 client.on_event(event=event)
 
         mock_client = Mock(spec=FootballGameClient)

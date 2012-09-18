@@ -10,10 +10,13 @@ from runrunlib.gameclient import FootballGameClient
 
 class FootballSimulationTests(TestCase):
     def test_should_pass_clients_to_run_game(self):
-        # Arrange & Act
-        football_simulation.run_game(team1=FootballTeam('team1'),
-                                     team2=FootballTeam('team2'),
-                                     clients=())
+        # Arrange
+        game = FootballGame() \
+                .team1(FootballTeam('team1')) \
+                .team2(FootballTeam('team2'))
+
+        # Act
+        football_simulation.run_game(game)
 
 
 class FootballSimulationGameTests(TestCase):
@@ -27,9 +30,11 @@ class FootballSimulationGameTests(TestCase):
             return lambda state: state
         def mock_pipeline(): return [step(s), step(s), step(s), step(s)]
 
-        simulation = FootballSimulationGame(team1=FootballTeam('team1'),
-                                            team2=FootballTeam('team2'),
-                                            clients=())
+        game = FootballGame() \
+                .team1(FootballTeam('team1')) \
+                .team2(FootballTeam('team2'))
+
+        simulation = FootballSimulationGame(game=game)
 
         # Act
         simulation.sim_game(pipeline=mock_pipeline)
@@ -47,9 +52,13 @@ class FootballSimulationGameTests(TestCase):
         mock_client1 = Mock(spec=FootballGameClient)
         mock_client2 = Mock(spec=FootballGameClient)
 
-        simulation = FootballSimulationGame(team1=FootballTeam('team1'),
-                                            team2=FootballTeam('team2'),
-                                            clients=(mock_client1, mock_client2))
+        game = FootballGame() \
+                .team1(FootballTeam('team1')) \
+                .team2(FootballTeam('team2')) \
+                .add_client(mock_client1) \
+                .add_client(mock_client2)
+
+        simulation = FootballSimulationGame(game=game)
 
         # Act
         simulation.sim_game(pipeline=mock_pipeline)
@@ -60,9 +69,11 @@ class FootballSimulationGameTests(TestCase):
 
     def test_should_notify_events_to_clients(self):
         # Arrange
-        simulation = FootballSimulationGame(team1=FootballTeam('team1'),
-                                            team2=FootballTeam('team2'),
-                                            clients=())
+        game = FootballGame() \
+                .team1(FootballTeam('team1')) \
+                .team2(FootballTeam('team2'))
+
+        simulation = FootballSimulationGame(game=game)
 
         # Act
         game_result = simulation.sim_game()
