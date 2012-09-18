@@ -14,7 +14,10 @@ class FootballSimulationGame(object):
         self._game = game
 
     def sim_game(self, pipeline=default_pipeline):
-        state = FootballSimulationGameState()
+        state = FootballSimulationGameState() \
+                    .gameid(self._game.get_gameid()) \
+                    .team1(self._game.get_team1()) \
+                    .team2(self._game.get_team2())
 
         for client in self._game.get_clients():
             state = state.add_client(client)

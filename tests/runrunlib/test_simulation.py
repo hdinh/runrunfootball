@@ -67,19 +67,30 @@ class FootballSimulationGameTests(TestCase):
         mock_client1.on_event.assert_called_once_with(event1)
         mock_client2.on_event.assert_called_once_with(event1)
 
-    def test_should_notify_events_to_clients(self):
+    def test_should_pass_certain_properties_to_gamestate(self):
         # Arrange
+        teama = FootballTeam('team1')
+        teamb = FootballTeam('team2')
         game = FootballGame() \
-                .team1(FootballTeam('team1')) \
-                .team2(FootballTeam('team2'))
+                .gameid(3847) \
+                .team1(teama) \
+                .team2(teamb)
 
         simulation = FootballSimulationGame(game=game)
+        class State: pass
+
+        def mock_step1(state):
+            State.game_state = state
+            return state
+        def mock_pipeline(): yield mock_step1
 
         # Act
-        game_result = simulation.sim_game()
+        game_result = simulation.sim_game(pipeline=mock_pipeline)
 
         # Assert
-        return
+        self.assertEqual(3847, State.game_state.get_gameid())
+        self.assertEqual(teama, State.game_state.get_team1())
+        self.assertEqual(teamb, State.game_state.get_team2())
 
 
 if __name__ == '__main__':
