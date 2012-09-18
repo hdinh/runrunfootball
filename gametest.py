@@ -1,7 +1,6 @@
-from runrunlib.footballgame import FootballGame
-from runrunlib.footballteam import FootballTeam
-from runrunlib.consoleclient import ConsoleClient
-from runrunlib.footballgameclient import FootballGameClient
+from runrunlib.game import FootballGame
+from runrunlib.team import FootballTeam
+from runrunlib.gameclient import FootballGameClient
 
 
 class ConsoleClient(FootballGameClient):
@@ -16,8 +15,7 @@ def main():
     console = ConsoleClient()
 
     teama = FootballTeam() \
-                .name('teama') \
-                .add_client(console)
+                .name('teama')
     teamb = FootballTeam().name('teamb')
 
     game = FootballGame() \

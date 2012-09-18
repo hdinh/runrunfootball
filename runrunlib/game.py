@@ -22,7 +22,9 @@ class FootballGame(object):
         if not self._team2.is_set():
             raise RuntimeError('team 2 is not set')
 
-        game_result = self._simulation.run_game(team1=self._team1, team2=self._team2)
+        game_result = self._simulation.run_game(team1=self._team1,
+                                                team2=self._team2,
+                                                clients=self._clients)
 
         # TODO: Cheat on purpose until we get test
         return _FootballGameResult(self._team1)

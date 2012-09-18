@@ -1,5 +1,6 @@
 from unittest import TestCase, main
-from unittest.mock import Mock
+from unittest.mock import Mock, ANY
+
 from runrunlib.game import FootballGame
 from runrunlib.team import not_set_team, FootballTeam
 from runrunlib.simulation import football_simulation
@@ -95,23 +96,42 @@ class FootballGameTests(TestCase):
                         .run()
 
         # Assert
-        mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2)
+        mock_simulation.run_game.assert_called_once_with(team1=team1, team2=team2, clients=ANY)
 
-    def test_add_client_should_add_client(self):
+    def test_add_client_should_return_client_when_get_clients(self):
         # Arrange
         mock_client = Mock(spec=FootballGameClient)
 
-        team1 = FootballTeam(name='team1')
-        team2 = FootballTeam(name='team2')
-
         # Act
         game = FootballGame() \
-                .team1(team1) \
-                .team2(team2) \
+                .team1(FootballTeam(name='team1')) \
+                .team2(FootballTeam(name='team2')) \
                 .add_client(mock_client)
 
         # Assert
         self.assertTrue(mock_client in game.get_clients())
+
+    def test_add_client_should_get_events_from_simulation(self):
+        # Arrange
+        event = Event('my event')
+        def mock_run_game(team1, team2, clients):
+            for client in clients:
+                client.on_event(event=event)
+
+        mock_client = Mock(spec=FootballGameClient)
+        mock_simulation = Mock(spec=type(football_simulation))
+        mock_simulation.run_game = mock_run_game
+
+        # Act
+        game = FootballGame() \
+                .team1(FootballTeam(name='team1')) \
+                .team2(FootballTeam(name='team2')) \
+                .simulation(mock_simulation) \
+                .add_client(mock_client)
+        game.run()
+
+        # Assert
+        mock_client.on_event.assert_called_once_with(event=event)
 
 
 if __name__ == '__main__':
