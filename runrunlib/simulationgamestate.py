@@ -1,14 +1,11 @@
 from .team import not_set_team
-
-DEFAULT_QUARTER_COUNT = 4
-DEFAULT_QUARTER_TIME = 60*15
+from .ruleset import default_ruleset
 
 
 class _FootballSimulationGameStateBase(object):
     def __init__(self,
                  gameid,
-                 quarter_count,
-                 quarter_time,
+                 ruleset,
                  team1,
                  team2,
                  possession,
@@ -16,8 +13,7 @@ class _FootballSimulationGameStateBase(object):
                  quarter,
                  events):
         self._gameid = gameid
-        self._quarter_count = quarter_count
-        self._quarter_time = quarter_time
+        self._ruleset = ruleset
         self._team1 = team1
         self._team2 = team2
         self._possession = possession
@@ -28,11 +24,8 @@ class _FootballSimulationGameStateBase(object):
     def get_gameid(self):
         return self._gameid
 
-    def get_quarter_count(self):
-        return self._quarter_count
-
-    def get_quarter_time(self):
-        return self._quarter_time
+    def get_ruleset(self):
+        return self._ruleset
 
     def get_team1(self):
         return self._team1
@@ -59,8 +52,7 @@ class _FootballSimulationGameStateBase(object):
 class FootballSimulationGameState(_FootballSimulationGameStateBase):
     def __init__(self,
                  gameid=-1,
-                 quarter_count=DEFAULT_QUARTER_COUNT,
-                 quarter_time=DEFAULT_QUARTER_TIME,
+                 ruleset=default_ruleset,
                  team1=not_set_team,
                  team2=not_set_team,
                  possession=not_set_team,
@@ -70,8 +62,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                  clients=()):
         _FootballSimulationGameStateBase.__init__(self,
                                                   gameid,
-                                                  quarter_count,
-                                                  quarter_time,
+                                                  ruleset,
                                                   team1,
                                                   team2,
                                                   possession,
@@ -85,8 +76,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             raise RuntimeError('gameid already set')
 
         return FootballSimulationGameState(gameid=gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -95,22 +85,9 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            events=self._events,
                                            clients=self._clients)
 
-    def quarter_count(self, quarter_count):
+    def ruleset(self, ruleset):
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=quarter_count,
-                                           quarter_time=self._quarter_time,
-                                           team1=self._team1,
-                                           team2=self._team2,
-                                           possession=self._possession,
-                                           time=self._time,
-                                           quarter=self._quarter,
-                                           events=self._events,
-                                           clients=self._clients)
-
-    def quarter_time(self, quarter_time):
-        return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=quarter_time,
+                                           ruleset=ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -124,8 +101,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             raise RuntimeError('team1 already set')
 
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=team,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -139,8 +115,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             raise RuntimeError('team2 already set')
 
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=team,
                                            possession=self._possession,
@@ -157,8 +132,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             raise RuntimeError('can only set possession to team1 or team2')
         
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=team,
@@ -169,8 +143,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
 
     def time(self, time):
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -184,8 +157,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             raise RuntimeError('quarter must be greater than 0')
 
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -199,8 +171,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
             client.on_event(event)
 
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -211,8 +182,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
 
     def add_client(self, client):
         return FootballSimulationGameState(gameid=self._gameid,
-                                           quarter_count=self._quarter_count,
-                                           quarter_time=self._quarter_time,
+                                           ruleset=self._ruleset,
                                            team1=self._team1,
                                            team2=self._team2,
                                            possession=self._possession,
@@ -223,8 +193,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
 
     def get_view_only_state(self):
         return ViewOnlyFootballSimulationGameState(gameid=self._gameid,
-                                                   quarter_count=self._quarter_count,
-                                                   quarter_time=self._quarter_time,
+                                                   ruleset=self._ruleset,
                                                    team1=self._team1.get_view_only_team(),
                                                    team2=self._team2.get_view_only_team(),
                                                    possession=self._possession.get_view_only_team(),
@@ -236,8 +205,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
 class ViewOnlyFootballSimulationGameState(_FootballSimulationGameStateBase):
     def __init__(self,
                  gameid,
-                 quarter_count,
-                 quarter_time,
+                 ruleset,
                  team1,
                  team2,
                  possession,
@@ -246,8 +214,7 @@ class ViewOnlyFootballSimulationGameState(_FootballSimulationGameStateBase):
                  events):
         _FootballSimulationGameStateBase.__init__(self,
                                                   gameid,
-                                                  quarter_count,
-                                                  quarter_time,
+                                                  ruleset,
                                                   team1,
                                                   team2,
                                                   possession,

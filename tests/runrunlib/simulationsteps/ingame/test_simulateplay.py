@@ -12,9 +12,7 @@ class SimulateFootballPlayTests(TestCase):
                     .team1(FootballTeam('teama')) \
                     .team2(FootballTeam('teamb')) \
                     .possession_index(0) \
-                    .quarter_count(4) \
                     .quarter(1) \
-                    .quarter_time(1000) \
                     .time(1)
 
         # Act

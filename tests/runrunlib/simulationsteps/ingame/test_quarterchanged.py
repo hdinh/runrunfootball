@@ -12,7 +12,6 @@ class QuarterChangedTests(TestCase):
                     .team1(FootballTeam('teama')) \
                     .team2(FootballTeam('teamb')) \
                     .quarter(1) \
-                    .quarter_time(40000) \
                     .time(40000)
 
         # Act
@@ -28,7 +27,6 @@ class QuarterChangedTests(TestCase):
                     .team2(FootballTeam('teamb')) \
                     .possession_index(0) \
                     .quarter(1) \
-                    .quarter_time(1000) \
                     .time(1)
 
         # Act

@@ -1,6 +1,7 @@
 from unittest import TestCase, main
 from runrunlib.simulationgamestate import FootballSimulationGameState
 from runrunlib import ruleset, KickOffPlay, NormalPlay, KickOffPlayOutcome, NormalPlayOutcome
+from runrunlib.ruleset import default_ruleset, FootballRuleset
 from runrunlib.team import FootballTeam
 
 
@@ -71,6 +72,28 @@ class FootballRulesetTests(TestCase):
 
         # Act & Assert
         self.assertNotEqual(ruleset.get_play_type(state), KickOffPlay)
+
+
+class DefaultRuleset(TestCase):
+    def test_get_quartercount_should_be_four(self):
+        self.assertEqual(4, default_ruleset.get_quarter_count())
+
+    def test_get_quartercount_should_be_four(self):
+        self.assertEqual(900, default_ruleset.get_quarter_time())
+
+    def test_should_set_quarter_count(self):
+        # Arrange & Act
+        state = FootballRuleset().quarter_count(3)
+
+        # Assert
+        self.assertEqual(state.get_quarter_count(), 3)
+
+    def test_should_set_quarter_time(self):
+        # Arrange & Act
+        state = FootballRuleset().quarter_time(300)
+
+        # Assert
+        self.assertEqual(state.get_quarter_time(), 300)
 
 
 if __name__ == '__main__':

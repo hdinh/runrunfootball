@@ -5,6 +5,7 @@ from runrunlib.simulationgamestate import FootballSimulationGameState, \
 from runrunlib import Event
 from runrunlib.team import FootballTeam
 from runrunlib.gameclient import FootballGameClient
+from runrunlib.ruleset import FootballRuleset
 
 
 class FootballSimulationGameStateTests(TestCase):
@@ -153,32 +154,19 @@ class FootballSimulationGameStateTests(TestCase):
         # Assert
         self.assertRaises(RuntimeError, state.gameid, 101)
 
-    def test_should_set_quarter_count(self):
-        # Arrange & Act
-        state = FootballSimulationGameState().quarter_count(3)
-
-        # Assert
-        self.assertEqual(state.get_quarter_count(), 3)
-
-    def test_should_set_quarter_time(self):
-        # Arrange & Act
-        state = FootballSimulationGameState().quarter_time(300)
-
-        # Assert
-        self.assertEqual(state.get_quarter_time(), 300)
-
     def test_get_view_only_state(self):
         # Arrange & Act
         teama = FootballTeam('teama')
         teamb = FootballTeam('teamb')
+        ruleset = FootballRuleset().quarter_count(5) \
+                                   .quarter_time(300)
         state = FootballSimulationGameState() \
                     .gameid(40) \
                     .team1(teama) \
                     .team2(teamb) \
                     .possession(teama) \
-                    .quarter_count(4) \
+                    .ruleset(ruleset) \
                     .quarter(3) \
-                    .quarter_time(300) \
                     .time(100) \
                     .get_view_only_state()
 
@@ -192,9 +180,9 @@ class FootballSimulationGameStateTests(TestCase):
         self.assertFalse(hasattr(state.get_team2(), 'get_controller'))
         self.assertFalse(hasattr(state.get_possession(), 'get_controller'))
         self.assertFalse(hasattr(state.get_nonpossession(), 'get_controller'))
-        self.assertEqual(state.get_quarter_count(), 4)
+        self.assertEqual(state.get_ruleset().get_quarter_count(), 5)
         self.assertEqual(state.get_quarter(), 3)
-        self.assertEqual(state.get_quarter_time(), 300)
+        self.assertEqual(state.get_ruleset().get_quarter_time(), 300)
         self.assertEqual(state.get_time(), 100)
         self.assertIsInstance(state, ViewOnlyFootballSimulationGameState)
 
