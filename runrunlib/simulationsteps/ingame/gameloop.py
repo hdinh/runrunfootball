@@ -11,11 +11,7 @@ def _default_pipeline():
     yield _stop_on(simulate_football_play)
 
 def simulate_until_end(state, pipeline=_default_pipeline):
-    continue_until_end_predicate = lambda s: \
-        s.get_quarter() < s.get_ruleset().get_quarter_count() and \
-        s.get_time() < s.get_ruleset().get_quarter_time()
-
-    return simulate_until(state, continue_until_end_predicate, pipeline)
+    return simulate_until(state, _continue_until_end_predicate, pipeline)
 
 def simulate_until(state, continue_predicate, pipeline=_default_pipeline):
     while continue_predicate(state):
@@ -42,3 +38,7 @@ def _cont_on(f):
     def f_wrapped(state):
         return f(state), False
     return f_wrapped
+
+def _continue_until_end_predicate(s):
+    return s.get_quarter() < s.get_ruleset().get_quarter_count() and \
+        s.get_time() < s.get_ruleset().get_quarter_time()

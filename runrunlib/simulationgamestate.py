@@ -59,7 +59,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                  time=0,
                  quarter=1,
                  events=(),
-                 clients=()):
+                 clients=(),
+                 private=set()):
         _FootballSimulationGameStateBase.__init__(self,
                                                   gameid,
                                                   ruleset,
@@ -70,6 +71,7 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                                   quarter,
                                                   events)
         self._clients = clients
+        self._private = private
 
     def gameid(self, gameid):
         if self._gameid != -1:
@@ -83,7 +85,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def ruleset(self, ruleset):
         return FootballSimulationGameState(gameid=self._gameid,
@@ -94,7 +97,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def team1(self, team):
         if self._team1.is_set():
@@ -108,7 +112,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def team2(self, team):
         if self._team2.is_set():
@@ -122,7 +127,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def possession_index(self, idx):
         return self.possession(self._team1 if idx == 0 else self.team2)
@@ -139,7 +145,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def time(self, time):
         return FootballSimulationGameState(gameid=self._gameid,
@@ -150,7 +157,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def quarter(self, quarter):
         if quarter <= 0:
@@ -164,7 +172,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=quarter,
                                            events=self._events,
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def event(self, event):
         for client in self._clients:
@@ -178,7 +187,8 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events + (event,),
-                                           clients=self._clients)
+                                           clients=self._clients,
+                                           private=self._private)
 
     def add_client(self, client):
         return FootballSimulationGameState(gameid=self._gameid,
@@ -189,7 +199,26 @@ class FootballSimulationGameState(_FootballSimulationGameStateBase):
                                            time=self._time,
                                            quarter=self._quarter,
                                            events=self._events,
-                                           clients=self._clients + (client,))
+                                           clients=self._clients + (client,),
+                                           private=self._private)
+
+    def private(self, private):
+        private_copy = self._private.copy()
+        private_copy.add(private)
+        return FootballSimulationGameState(gameid=self._gameid,
+                                           ruleset=self._ruleset,
+                                           team1=self._team1,
+                                           team2=self._team2,
+                                           possession=self._possession,
+                                           time=self._time,
+                                           quarter=self._quarter,
+                                           events=self._events,
+                                           clients=self._clients,
+                                           private=private_copy)
+
+    def has_private(self, element):
+        # Right now, this is only support sets
+        return element in self._private
 
     def get_view_only_state(self):
         return ViewOnlyFootballSimulationGameState(gameid=self._gameid,

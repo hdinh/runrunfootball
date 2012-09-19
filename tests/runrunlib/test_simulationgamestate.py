@@ -203,6 +203,26 @@ class FootballSimulationGameStateTests(TestCase):
         # Assert
         mock_client.on_event.assert_called_once_with(event)
 
+    def test_private_data_should_set_data_which_you_can_get(self):
+        # Arrange & Act
+        state = FootballSimulationGameState() \
+                    .private('zoozoo')
+
+        # Act
+        self.assertTrue(state.has_private('zoozoo'))
+        self.assertFalse(state.has_private('zoozoo-no'))
+
+    def test_private_data_should_set_data_which_you_can_get2(self):
+        # Arrange & Act
+        state = FootballSimulationGameState() \
+                    .private(('abcdef', 123, 'z'))
+
+        # Act
+        self.assertTrue(state.has_private(('abcdef', 123, 'z')))
+        self.assertFalse(state.has_private(('abcdef', 123, 'no')))
+        self.assertFalse(state.has_private(('abcdef', 321, 'z')))
+        self.assertFalse(state.has_private(('fedcba', 123, 'z')))
+
 
 if __name__ == '__main__':
     main()

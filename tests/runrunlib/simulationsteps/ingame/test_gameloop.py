@@ -78,8 +78,8 @@ class GameLoopTests(TestCase):
 
         def countcalls(state):
             S.count += 1
-            if S.count >= 10:
-                state = state.quarter(10)
+            if S.count >= 3:
+                state = state.quarter(5)
             return state, True
 
         def mock_pipeline():
@@ -89,7 +89,7 @@ class GameLoopTests(TestCase):
         simulate_until_end(state, pipeline=mock_pipeline)
 
         # Assert
-        self.assertEqual(10, S.count)
+        self.assertEqual(3, S.count)
 
 
 if __name__ == '__main__':
