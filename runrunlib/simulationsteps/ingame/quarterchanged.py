@@ -2,12 +2,11 @@ from runrunlib.event import Event
 
 
 def quarter_changed(state):
-    #if not state.get_private((QuarterChangedEvent, state.get_quarter())):
     if state.get_time() >= state.get_ruleset().get_quarter_time():
         return state.quarter(state.get_quarter() + 1) \
+                    .time(0) \
                     .event(QuarterChangedEvent(state.get_quarter(), state.get_quarter() + 1))
-    else:
-        return state
+    return state
 
 
 class QuarterChangedEvent(Event):

@@ -34,6 +34,22 @@ class QuarterBannerTests(TestCase):
         # Assert
         self.assertFalse(QuarterStartBannerEvent in map(lambda e: type(e), state2.get_events()))
 
+    def test_should_only_occur_once_a_quarter(self):
+        # Arrange
+        state = FootballSimulationGameState() \
+                    .team1(FootballTeam('teama')) \
+                    .team2(FootballTeam('teamb')) \
+                    .quarter(2) \
+                    .time(0)
+
+        # Act
+        state = quarter_banner(state)
+        state = quarter_banner(state)
+
+        # Assert
+        types = [type(t) for t in state.get_events()]
+        self.assertEqual(1, types.count(QuarterStartBannerEvent))
+
 
 if __name__ == '__main__':
     main()
