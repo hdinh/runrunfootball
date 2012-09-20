@@ -7,12 +7,17 @@ from runrunlib import ruleset, \
 def sim(state):
     play_type = ruleset.get_play_type(state)
 
+    #import pdb; pdb.set_trace()
     play1 = state.get_possession() \
                  .get_controller() \
-                 .choose_play(play_type, state.get_view_only_state())
+                 .choose_play(play_type,
+                              state.get_view_only_state(),
+                              state.get_possession().get_playbook())
     play2 = state.get_nonpossession() \
                  .get_controller() \
-                 .choose_play(play_type, state.get_view_only_state())
+                 .choose_play(play_type,
+                              state.get_view_only_state(),
+                              state.get_nonpossession().get_playbook())
 
     #if play1.get_play_type() == PlayType.Run:
     #    return 5
@@ -37,5 +42,5 @@ def sim(state):
                                              state.get_nonpossession()))
 
 
-def do_mix(state):
+def do_mix(play1, play2):
     return NormalPlayOutcome('')

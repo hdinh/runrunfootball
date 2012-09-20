@@ -1,3 +1,9 @@
+from . import KickOffReceivingPlay, \
+              KickOffKickingPlay, \
+              OffensePlay, \
+              DefensePlay
+
+
 class FootballPlaybook(object):
     def __init__(self,
                  name='Unnamed Playbook',
@@ -95,4 +101,8 @@ class FootballPlaybook(object):
         return self._kickoff_kicking_plays
 
 
-default_playbook = FootballPlaybook()
+default_playbook = FootballPlaybook() \
+                    .add_kickoff_kicking_play(KickOffKickingPlay(name='Kick Straight')) \
+                    .add_kickoff_receiving_play(KickOffReceivingPlay(name='Return Straight')) \
+                    .add_offense_play(OffensePlay(name='Slant')) \
+                    .add_defense_play(DefensePlay(name='Blitz'))

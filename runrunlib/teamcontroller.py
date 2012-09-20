@@ -1,4 +1,7 @@
-from . import KickOffPlay, NormalPlay
+from . import KickOffReceivingPlay, \
+              KickOffKickingPlay, \
+              OffensePlay, \
+              DefensePlay
 
 
 class FootballTeamController(object):
@@ -7,11 +10,15 @@ class FootballTeamController(object):
 
 
 class CpuFootballTeamController(FootballTeamController):
-    def choose_play(self, play_type, state):
-        if play_type == KickOffPlay:
-            return KickOffPlay()
-        elif play_type == NormalPlay:
-            return NormalPlay()
+    def choose_play(self, play_type, state, playbook):
+        if play_type == KickOffReceivingPlay:
+            return playbook.get_kickoff_receiving_plays()[0]
+        elif play_type == KickOffKickingPlay:
+            return playbook.get_kickoff_kicking_plays()[0]
+        elif play_type == OffensePlay:
+            return playbook.get_offense_plays()[0]
+        elif play_type == DefensePlay:
+            return playbook.get_defense_plays()[0]
 
     def is_set(object):
         return True
