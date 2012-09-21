@@ -102,7 +102,7 @@ class FootballPlaybookTests(TestCase):
         # Assert
         self.assertTrue(play in playbook.get_kickoff_kicking_plays())
 
-    def test_remove_kickoff_kicking_play_be_able_to_remove(self):
+    def test_remove_kickoff_kicking_play_should_be_able_to_remove(self):
         # Arrange
         play = Mock(spec=KickOffKickingPlay)
 

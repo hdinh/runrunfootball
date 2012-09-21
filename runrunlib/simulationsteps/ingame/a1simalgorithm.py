@@ -13,6 +13,7 @@ def sim(state):
                  .choose_play(play_type,
                               state.get_view_only_state(),
                               state.get_possession().get_playbook())
+
     play2 = state.get_nonpossession() \
                  .get_controller() \
                  .choose_play(play_type,
@@ -22,8 +23,10 @@ def sim(state):
     #if play1.get_play_type() == PlayType.Run:
     #    return 5
     #elif play
-    #expected_gain = get_expected_gain()
-    #play_choose_points, t1 = compute_play_choose()
+    #expected_gain1 = play1.get_expected_gain()
+    #z = compare_plays(play1, play2)
+    #quality1 = get_quality(state.get_possession())
+    #quality2 = get_quality(state.get_nonpossession())
     #offensive_quality_points, t2 = compute_offensive_quality()
     #offensive_luck_points, t3 = compute_luck_points()
 
